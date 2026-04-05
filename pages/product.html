@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velvet Crema — Velvet Crema Signature Roast</title>
+  <meta name="description" content="A heavy-bodied masterpiece defined by its viscous texture and deep, lingering finish." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .pdp-hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 90svh;
+    }
+    @media (min-width: 768px) {
+      .pdp-hero { grid-template-columns: 58% 42%; min-height: 80svh; }
+    }
+
+    .pdp-hero__img {
+      position: relative;
+      min-height: 55vw;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) { .pdp-hero__img { min-height: unset; } }
+
+    .pdp-hero__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) brightness(0.78);
+    }
+
+    .pdp-hero__text {
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media (min-width: 768px) { .pdp-hero__text { padding: 3.5rem 4rem; } }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .price-divider { height: 1px; width: 3rem; background: var(--outline-variant); }
+
+    .tasting-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 640px) { .tasting-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .brewing-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    @media (min-width: 768px) { .brewing-layout { grid-template-columns: 1fr 1fr; } }
+
+    .brewing-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: 0 40px 60px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top-nav" role="banner">
+    <div style="display:flex;align-items:center;gap:2rem">
+      <button class="top-nav__icon-btn hamburger" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+    <a href="../index.html" class="top-nav__logo">Velvet Crema</a>
+    <div class="top-nav__actions">
+      <a href="cart.html" class="top-nav__icon-btn primary-icon" aria-label="Cart" style="position:relative">
+        <span class="material-symbols-outlined">shopping_bag</span>
+        <span style="position:absolute;top:-4px;right:-4px;background:var(--primary);color:var(--on-primary);font-size:0.5rem;font-weight:700;width:1rem;height:1rem;display:flex;align-items:center;justify-content:center;border-radius:50%">2</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- ═══ PRODUCT HERO ═══ -->
+    <section class="pdp-hero" aria-label="Product spotlight">
+
+      <!-- Image col -->
+      <div class="pdp-hero__img">
+        <img
+          src="https://lh3.googleusercontent.com/aidapublic/AB6AXuAhOQM6K20lT8PKbwCJeeezOxNjStvXLIaqPnm8e6Gbe91xUeY_M36N_I7iZU6MiJ_cQY1_icsALB4SduMgI-eol2XiCH6YJYpN2oAbJ6FSBeimNp7wYMXj5SvJKouWhSgjHVZaDiRthNZ0FPjX4grnDBORdTEmBb4m23JTlZT_OOqUdmF4ky61NJ4-hosZT57_xuHDILhypCqL9XHhF0h9bi7lscUhhxe4Da7UAJoi2T5RRpJN6foB2ScYzVOYmTOPnJfr3xdQ"
+          alt="Premium espresso beans — matte black bag with dramatic golden rim lighting"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <!-- Origin card -->
+        <div class="origin-card" style="position:absolute;bottom:3rem;right:0;max-width:18rem">
+          <p class="origin-card__label">Origin Profile</p>
+          <p class="origin-card__title">Sumatran Highlands</p>
+          <p class="origin-card__text">Single-estate volcanic soil harvest. Roasted at midnight for peak intensity.</p>
+        </div>
+      </div>
+
+      <!-- Text col -->
+      <div class="pdp-hero__text">
+        <span class="label-caps text-primary" style="display:block;margin-bottom:1rem">Signature Roast</span>
+        <h1 class="font-headline" style="font-size:clamp(3rem,7vw,5.5rem);font-weight:300;line-height:1;margin-bottom:1.5rem">
+          Velvet<br /><em style="color:var(--tertiary)">Crema</em>
+        </h1>
+
+        <div class="price-row">
+          <span class="font-headline" style="font-size:2rem;color:var(--primary)">$32.00</span>
+          <div class="price-divider"></div>
+          <span class="label-caps text-on-surface-var">250g Whole Bean</span>
+        </div>
+
+        <p style="color:var(--on-surface-variant);line-height:1.75;margin-bottom:2.5rem;font-size:1.05rem;font-weight:300;max-width:28rem">
+          A heavy-bodied masterpiece defined by its viscous texture and deep, lingering finish. Developed for those who seek the ritual of the perfect pull.
+        </p>
+
+        <div style="display:flex;flex-direction:column;gap:1rem;max-width:26rem">
+          <button class="btn btn-primary" style="width:100%;justify-content:space-between" data-quick-add>
+            Add to Cart
+            <span class="material-symbols-outlined">arrow_right_alt</span>
+          </button>
+          <button class="btn btn-outline" style="width:100%">
+            Subscription Options
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══ TASTING NOTES ═══ -->
+    <section class="section-pad" style="background:var(--surface-container-low)" aria-labelledby="tasting-heading">
+      <div class="container">
+        <h2 id="tasting-heading" class="font-headline" style="font-size:clamp(1.5rem,3vw,2rem);font-weight:300;margin-bottom:2.5rem;text-align:center">
+          Tasting Notes
+        </h2>
+        <div class="tasting-grid">
+          <div class="taste-card animate-fade-up">
+            <span class="material-symbols-outlined taste-card__icon">dark_mode</span>
+            <div>
+              <h3 class="taste-card__title">Dark Chocolate</h3>
+              <p class="taste-card__text">The foundation. Rich cocoa butter notes that melt into the palate with a bittersweet edge.</p>
+            </div>
+          </div>
+          <div class="taste-card animate-fade-up animate-fade-up-1">
+            <span class="material-symbols-outlined taste-card__icon">oven_gen</span>
+            <div>
+              <h3 class="taste-card__title">Smoky Caramel</h3>
+              <p class="taste-card__text">Burnt sugar sweetness with a whisper of hickory smoke, balancing the roast intensity.</p>
+            </div>
+          </div>
+          <div class="taste-card animate-fade-up animate-fade-up-2">
+            <span class="material-symbols-outlined taste-card__icon">potted_plant</span>
+            <div>
+              <h3 class="taste-card__title">Black Cherry</h3>
+              <p class="taste-card__text">A subtle stone-fruit acidity that cuts through the creaminess for a refined finish.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══ BREWING GUIDE ═══ -->
+    <section class="section-pad container" aria-labelledby="brewing-heading">
+      <div class="brewing-layout">
+        <div>
+          <img
+            class="brewing-img"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAtgk7eeOHYhaGphKvrEOwuHvoS3qE4Nlojhzqmt8kQH0RriCHtcZdgnN96fGZgYDsZTjYFdVe1anVmFDw7llAgK2kiN1_3rvRKFp04ZWKdh_VS1LSQzaoH8rXItifQ9Y1JOSnuzs0Tw_uq3MecUIpdOu8dZ2dHRFXw6RK_ob22kfsNQVhHjltQvqFmtA1MJmWXiIx3ELLKgdQQvAdE222693k1J-IwLqbunme5-Kcm72XJNnt2iUtPw57eYIkRisDj-DZ_IMs"
+            alt="Thick espresso pouring from portafilter — rich golden crema swirl"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <h2 id="brewing-heading" class="font-headline" style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-style:italic;font-weight:300;margin-bottom:3rem">
+            The Perfect Pull
+          </h2>
+          <div style="display:flex;flex-direction:column;gap:3rem">
+            <div class="brewing-step animate-fade-up">
+              <span class="brewing-step__num">01</span>
+              <div>
+                <p class="brewing-step__label">Dose</p>
+                <p class="brewing-step__text">18–20g in a precision basket. Fine grind, consistent tamp.</p>
+              </div>
+            </div>
+            <div class="brewing-step animate-fade-up animate-fade-up-1">
+              <span class="brewing-step__num">02</span>
+              <div>
+                <p class="brewing-step__label">Yield</p>
+                <p class="brewing-step__text">36–40g out. Focus on a 1:2 ratio to maximize the velvet texture.</p>
+              </div>
+            </div>
+            <div class="brewing-step animate-fade-up animate-fade-up-2">
+              <span class="brewing-step__num">03</span>
+              <div>
+                <p class="brewing-step__label">Time</p>
+                <p class="brewing-step__text">28–32 seconds. Look for the tiger-striping transition in the stream.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══ PAIRS WELL WITH ═══ -->
+    <section class="section-pad" style="background:var(--surface-container-lowest)" aria-labelledby="pairs-heading">
+      <div class="container">
+        <h2 id="pairs-heading" class="font-headline" style="font-size:clamp(1.5rem,3vw,2rem);font-weight:300;margin-bottom:3rem">
+          Pairs Well With
+        </h2>
+        <div class="pairs-grid">
+          <div class="pair-card animate-fade-up">
+            <div class="pair-card__img-wrap">
+              <img
+                src="https://lh3.googleusercontent.com/aidapublic/AB6AXuBx1VHN5WyoRaN337DtFNTOlMcBqpjxukLbp1gfFPfPWhM_Ypb2WvJQ8nOA9mcniRusw966bg2b9whKZ51zI46bGLzmPlZo0EzF9-IqGtp5x7mViztI0ZLNYlTuIto3WnMHA6k3KIC7SCTwULKyB2EXQUehqFiu-x-2PHH20xgpCUp134xB6gBQ9TBED572wDrbEfcBUudhseUboMQIxrrj8382spUUZl4o6sNrLwy6JKiT_bverRGoN0ZbRWElB6ES9hAk4-dIM"
+                alt="Dark chocolate truffles with cocoa dusting on textured plate"
+                loading="lazy"
+              />
+            </div>
+            <p class="pair-card__name">Artisan Cocoa Truffles</p>
+            <p class="pair-card__price">$14.00</p>
+          </div>
+          <div class="pair-card animate-fade-up animate-fade-up-1">
+            <div class="pair-card__img-wrap">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0TWDuTAQYykfI-sIlpT9GCnyCFhsjg3wPWWQ_hNGn1NDsaTdamjAge092ClOpFrfva3qGVs66dSm56a1S7bZ35simOTPc6lna51DrDDmpv7bBaFGUMEsB9WDl7MwTNfsZytd9yI6HSqYjJD8e8v5G8RQabh6cPlgxAmqtn7ipvxXk1Avf9k2oOUqtMnbWzj9Mva6qTiSHIH4qYnhxIvgL0zQC3rfmxufiUPfonzIiR92SvsDAAuG8d8_TmNyR8LK8lS4CxDg"
+                alt="Nocturnal Ceramic Set — matte espresso cup with gold rim on concrete coaster"
+                loading="lazy"
+              />
+            </div>
+            <p class="pair-card__name">Nocturnal Ceramic Set</p>
+            <p class="pair-card__price">$45.00</p>
+          </div>
+          <div class="pair-card animate-fade-up animate-fade-up-2">
+            <div class="pair-card__img-wrap">
+              <img
+                src="https://lh3.googleusercontent.com/aidapublic/AB6AXuBRLXkEXgzQg9HvLGH9EGjMo2nVJGDHZVzK2xZytCAnPXFDlbGk5gJfXQqX5S5wH6VYvBKNlsJNpM6w4ruWXCzElMMxmtI8FIz-7C-s8Dkb5fdn2O15vyiZKgGRvwDQZtO9faiHYxVX6PO43ugPjA4cPPnw9EwJlNd0Ea2WeBm3sitAJu4E5TjOyTrmAX58_JZMGkxvNW4sogaNm9anj5U4Bw595LijQXyEkh_ldTT2WgbmHF4WyCrIu_eeTKumE651QUmdEqMmm4"
+                alt="Crystal glass water decanter on dark tray beside coffee equipment"
+                loading="lazy"
+              />
+            </div>
+            <p class="pair-card__name">Crystal Water Decanter</p>
+            <p class="pair-card__price">$85.00</p>
+          </div>
+          <div class="pair-card animate-fade-up animate-fade-up-3">
+            <div class="pair-card__img-wrap">
+              <img
+                src="https://lh3.googleusercontent.com/aidapublic/AB6AXuCJqCGXC8B5D56A_TBYfCVtZIc6Er2vYPn79OVeR1id1Bn7WBYvIefDsZFyl1BZdBlO19t1zV73eoItOOnmWXtnz3Zhx8tB3RScFh4HJWlSQDEl5anotlphl6pW07lynQ3LEf5UGkYvsD2o8_0MhcLgndyY1tetCxo0IP0NjoYasx8gVo8-9GgN6C9mw7nM9QsIAG2QpKwO75id_GFf065qS_gffWQuelUjKiVdnBIFiqqBjOzwBe9B0b0K7nCPBXnFZEJTtf66s"
+                alt="Flaky buttery midnight croissant on slate plate beside dark coffee"
+                loading="lazy"
+              />
+            </div>
+            <p class="pair-card__name">Midnight Croissants</p>
+            <p class="pair-card__price">$12.00</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div>© 2025 Velvet Crema</div>
+      <nav class="site-footer__links" aria-label="Legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sustainability</a>
+      </nav>
+      <nav class="site-footer__social" aria-label="Social">
+        <a href="#">Instagram</a>
+        <a href="#">Vimeo</a>
+      </nav>
+    </footer>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="../index.html" class="bottom-nav__item">
+      <span class="material-symbols-outlined">home_max</span>Home
+    </a>
+    <a href="boutique.html" class="bottom-nav__item active" aria-current="page">
+      <span class="material-symbols-outlined">local_cafe</span>Boutique
+    </a>
+    <a href="#" class="bottom-nav__item">
+      <span class="material-symbols-outlined">menu_book</span>Journal
+    </a>
+    <a href="cart.html" class="bottom-nav__item" style="position:relative">
+      <span class="material-symbols-outlined">shopping_cart</span>Cart
+      <span class="bottom-nav__badge">2</span>
+    </a>
+  </nav>
+
+  <button class="fab" aria-label="Concierge">
+    <span class="material-symbols-outlined">coffee_maker</span>
+    <span class="fab__tooltip">Concierge</span>
+  </button>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

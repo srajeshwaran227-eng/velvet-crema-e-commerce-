@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velvet Crema | Your Cart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="top-nav" role="banner">
+    <div style="display:flex;align-items:center;gap:2.5rem">
+      <button class="top-nav__icon-btn hamburger" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <nav class="top-nav__links" aria-label="Primary">
+        <a href="boutique.html" class="top-nav__link">Boutique</a>
+        <a href="#" class="top-nav__link">Our Roastery</a>
+      </nav>
+    </div>
+    <a href="../index.html" class="top-nav__logo">Velvet Crema</a>
+    <div style="display:flex;align-items:center;gap:1.5rem">
+      <nav class="top-nav__links" aria-label="Secondary">
+        <a href="#" class="top-nav__link">Journal</a>
+        <a href="membership.html" class="top-nav__link">Membership</a>
+      </nav>
+      <div class="top-nav__actions">
+        <button class="top-nav__icon-btn" aria-label="Search">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+        <a href="cart.html" class="top-nav__icon-btn primary-icon active" aria-current="page" aria-label="Shopping bag">
+          <span class="material-symbols-outlined">shopping_bag</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content container" style="padding-top: calc(var(--nav-height) + 4rem); min-height: 80vh;">
+    <h1 class="font-headline" style="font-size:clamp(2.5rem,5vw,4rem);font-weight:300;margin-bottom:3rem">Your Cart</h1>
+    
+    <div class="cart-layout">
+      <!-- Cart Items Section -->
+      <div>
+        <div id="cart-items" style="display:flex;flex-direction:column;gap:2rem;">
+          <!-- Items will be injected here via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Order Summary Section -->
+      <div>
+        <div class="order-summary">
+          <h2 class="order-summary__title">Order Summary</h2>
+          <div class="order-row">
+            <span class="order-row__label">Subtotal</span>
+            <span class="order-row__value" data-subtotal>$0.00</span>
+          </div>
+          <div class="order-row">
+            <span class="order-row__label">Shipping</span>
+            <span class="order-row__value">$18.00</span>
+          </div>
+          <div class="order-row">
+            <span class="order-row__label">Tax (Estimated)</span>
+            <span class="order-row__value" id="tax-amount">$0.00</span>
+          </div>
+          <div class="order-total">
+            <span class="order-total__label">Total</span>
+            <span class="order-total__value" data-total id="total">$0.00</span>
+          </div>
+          
+          <button class="btn btn-primary" style="width:100%;margin-top:2rem" onclick="checkout()">Proceed to Checkout</button>
+          <div class="security-text">Secure Checkout • SSL Encrypted</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

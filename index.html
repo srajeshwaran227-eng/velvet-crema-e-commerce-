@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velvet Crema | The Sensory Sommelier</title>
+  <meta name="description"
+    content="Experience the velvet texture and deep aromatic profiles of our sommelier-selected beans." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@300;400;600;800&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Page-specific overrides */
+    .hero {
+      padding-top: var(--nav-height);
+    }
+
+    /* Dark Roast bento cell on mobile - fixed height */
+    @media (max-width: 767px) {
+      .bento-cell {
+        min-height: 22rem;
+      }
+
+      .bento-grid__full {
+        min-height: 16rem !important;
+      }
+    }
+
+    /* Collections grid — mobile stacking */
+    .collections-bento {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .collections-bento {
+        grid-template-columns: repeat(12, 1fr);
+        height: 860px;
+      }
+
+      .col-8 {
+        grid-column: span 8;
+      }
+
+      .col-4 {
+        grid-column: span 4;
+      }
+
+      .col-12 {
+        grid-column: span 12;
+        height: 18rem;
+      }
+    }
+
+    /* Daily Essentials grid */
+    .essentials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .essentials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .essentials-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Navigation -->
+  <header class="top-nav" role="banner">
+    <div style="display:flex;align-items:center;gap:2.5rem">
+      <button class="top-nav__icon-btn hamburger" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <nav class="top-nav__links" aria-label="Primary">
+        <a href="pages/boutique.html" class="top-nav__link">Boutique</a>
+        <a href="#" class="top-nav__link">Our Roastery</a>
+      </nav>
+    </div>
+
+    <a href="index.html" class="top-nav__logo" aria-label="Velvet Crema home">Velvet Crema</a>
+
+    <div style="display:flex;align-items:center;gap:1.5rem">
+      <nav class="top-nav__links" aria-label="Secondary">
+        <a href="pages/journal.html" class="top-nav__link">Journal</a>
+        <a href="pages/membership.html" class="top-nav__link">Membership</a>
+      </nav>
+      <div class="top-nav__actions">
+        <button class="top-nav__icon-btn" aria-label="Search">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+        <a href="pages/cart.html" class="top-nav__icon-btn primary-icon" aria-label="Shopping bag"
+          style="position:relative">
+          <span class="material-symbols-outlined">shopping_bag</span>
+          <span
+            style="position:absolute;top:-4px;right:-4px;background:var(--primary);color:var(--on-primary);font-size:0.5rem;font-weight:700;width:1rem;height:1rem;display:flex;align-items:center;justify-content:center;border-radius:50%">2</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- ═══════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════ -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero__bg">
+        <img src="images/coffee_hero_1775374671404.png" alt="Premium coffee cup — cinematic 3D render" loading="eager"
+          fetchpriority="high" />
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__overlay-lr"></div>
+
+      <div class="hero__content">
+        <span class="hero__eyebrow animate-fade-up animate-pulse">The Art of the Pour</span>
+        <h1 class="hero__title animate-fade-up animate-fade-up-1">
+          Elevate Your<br /><em>Morning Ritual</em>
+        </h1>
+        <p class="hero__subtitle animate-fade-up animate-fade-up-2">
+          Experience the velvet texture and deep aromatic profiles of our sommelier-selected
+          beans, roasted to perfection for the discerning palate.
+        </p>
+        <div class="hero__actions animate-fade-up animate-fade-up-3">
+          <a href="pages/boutique.html" class="btn btn-primary">Explore Boutique</a>
+          <button class="btn btn-outline">Our Story</button>
+        </div>
+      </div>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-indicator__line"></div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         FEATURED COLLECTIONS
+    ═══════════════════════════════════════ -->
+    <section class="section-pad container" aria-labelledby="collections-heading">
+      <div class="section-header">
+        <div>
+          <h2 id="collections-heading" class="section-header__title">The Collections</h2>
+          <p class="section-header__subtitle">
+            Curated selections designed for the discerning palate, from the obsidian depths of our dark roasts to the
+            precision of modern brewing.
+          </p>
+        </div>
+        <a href="pages/boutique.html" class="section-header__link">View All Series</a>
+      </div>
+
+      <div class="collections-bento">
+        <!-- Dark Roast – large -->
+        <div class="bento-cell col-8">
+          <img class="bento-cell__img" src="images/coffee_beans_dark_1775374846714.png"
+            alt="Dark roasted coffee beans — warm spotlit closeup" />
+          <div class="bento-cell__gradient"></div>
+          <div class="bento-cell__content">
+            <span class="label-caps text-primary" style="display:block;margin-bottom:1rem">Signature Series</span>
+            <h3 class="font-headline" style="font-size:clamp(1.75rem,3.5vw,3.25rem);font-weight:300;margin-bottom:1rem">
+              The Dark Roast Collection
+            </h3>
+            <p class="text-on-surface-var"
+              style="max-width:30rem;margin-bottom:1.5rem;font-weight:300;font-size:1.05rem">
+              Notes of toasted cacao, dark cherry, and a whisper of smoke. For those who seek intensity.
+            </p>
+            <a href="pages/product.html" class="btn btn-primary btn-sm">Discover</a>
+          </div>
+        </div>
+
+        <!-- Accessories – side -->
+        <div class="bento-cell col-4">
+          <img class="bento-cell__img" src="images/coffee_accessories_1775375095577.png"
+            alt="Pour-over coffee maker and copper kettle" />
+          <div class="bento-cell__gradient"></div>
+          <div class="bento-cell__content">
+            <h3 class="font-headline"
+              style="font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:300;margin-bottom:0.75rem">
+              Brewing Accessories
+            </h3>
+            <p class="text-on-surface-var" style="margin-bottom:1.5rem;font-weight:300">
+              Precision instruments for the perfect extraction.
+            </p>
+            <a href="pages/boutique.html" class="btn btn-ghost"
+              style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem">
+              Shop Gear <span style="transition:transform 0.3s ease">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Ethiopia – full-width bottom -->
+        <div class="bento-cell col-12" style="min-height:16rem">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column">
+            <!-- Mobile: stacked; Desktop: side-by-side -->
+            <div style="display:flex;flex-direction:column;height:100%">
+              <div style="flex:1;padding:2.5rem;display:flex;flex-direction:column;justify-content:center">
+                <span class="label-caps text-secondary">Limited Edition</span>
+                <h3 class="font-headline"
+                  style="font-size:clamp(1.5rem,3vw,2.5rem);font-weight:300;margin-bottom:0.75rem">
+                  Ethiopian Yirgacheffe
+                </h3>
+                <p class="text-on-surface-var" style="font-weight:300">
+                  Floral jasmine and bright citrus notes. Arriving this season.
+                </p>
+              </div>
+            </div>
+          </div>
+          <img class="bento-cell__img" src="https://i.pinimg.com/1200x/21/e4/41/21e441d6af58f64c8d082ffc69fbd3b0.jpg"
+            alt="Coffee beans falling into wooden bowl — dramatic high speed shot" style="opacity:0.5" />
+          <div class="bento-cell__gradient"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         EDITORIAL QUOTE
+    ═══════════════════════════════════════ -->
+    <div class="editorial-quote">
+      <span class="material-symbols-outlined quote-icon" aria-hidden="true">format_quote</span>
+      <blockquote>
+        "Coffee is not a morning necessity; it is a midnight contemplation, a sensory journey that begins before the
+        first sip."
+      </blockquote>
+      <cite>— The Sommelier</cite>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         DAILY ESSENTIALS
+    ═══════════════════════════════════════ -->
+    <section class="section-pad container" aria-labelledby="essentials-heading">
+      <div style="text-align:center;margin-bottom:5rem">
+        <h2 id="essentials-heading" class="font-headline" style="font-size:clamp(2rem,4vw,3.25rem);font-weight:300">
+          The Daily Essentials
+        </h2>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="essentials-grid">
+
+        <!-- Product 1 -->
+        <article class="product-card animate-fade-up">
+          <div class="product-card__image-wrap">
+            <img src="images/coffee_bag_1775375120850.png"
+              alt="Velvet Noir — minimalist coffee bag, dark textured background" loading="lazy" />
+            <span class="product-card__badge">New</span>
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Velvet Noir', 32, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <h3 class="product-card__name">Velvet Noir</h3>
+            <p class="product-card__sub">Deep Chocolate &amp; Toffee</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$32.00</span>
+              <button class="product-card__fav" aria-label="Add to favourites">
+                <span class="material-symbols-outlined">favorite</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="product-card animate-fade-up animate-fade-up-1">
+          <div class="product-card__image-wrap">
+            <img src="https://i.pinimg.com/736x/96/74/f0/9674f0be033382c620eca0e63e6e97f2.jpg"
+              alt="Copper frother and latte art tools on marble slab" loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Copper Frother', 58, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <h3 class="product-card__name">Copper Frother</h3>
+            <p class="product-card__sub">Artisanal Hardware</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$58.00</span>
+              <button class="product-card__fav" aria-label="Add to favourites">
+                <span class="material-symbols-outlined">favorite</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="product-card animate-fade-up animate-fade-up-2">
+          <div class="product-card__image-wrap">
+            <img src="https://i.pinimg.com/1200x/96/42/8e/96428e091a41fbb5747c5f6e29f601e9.jpg"
+              alt="Basalt Vessel — designer ceramic mug, moody dark room" loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Basalt Vessel', 45, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <h3 class="product-card__name">Basalt Vessel</h3>
+            <p class="product-card__sub">Hand-thrown Ceramic</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$45.00</span>
+              <button class="product-card__fav" aria-label="Add to favourites">
+                <span class="material-symbols-outlined">favorite</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 4 -->
+        <article class="product-card animate-fade-up animate-fade-up-3">
+          <div class="product-card__image-wrap">
+            <img src="https://i.pinimg.com/1200x/35/75/cf/3575cfc5a40e5fccad168a1514b09ed3.jpg"
+              alt="Golden Crema — coffee beans in glass container, high contrast lighting" loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Golden Crema', 34, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <h3 class="product-card__name">Golden Crema</h3>
+            <p class="product-card__sub">Honey &amp; Almond Blend</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$34.00</span>
+              <button class="product-card__fav" aria-label="Add to favourites">
+                <span class="material-symbols-outlined">favorite</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         NEWSLETTER
+    ═══════════════════════════════════════ -->
+    <div class="newsletter-section">
+      <div style="max-width:36rem;margin-inline:auto;text-align:center;padding-inline:1.5rem">
+        <h3 class="font-headline" style="font-size:clamp(1.75rem,4vw,3rem);font-weight:300;margin-bottom:1rem">
+          The Journal Entry
+        </h3>
+        <p
+          style="color:var(--on-surface-variant);font-weight:300;line-height:1.7;margin-bottom:2.5rem;font-size:1.05rem">
+          Join our inner circle for exclusive access to microlot releases, brewing tutorials, and the stories behind the
+          beans.
+        </p>
+        <form class="newsletter-form" data-newsletter aria-label="Newsletter signup">
+          <label for="email-home" class="sr-only">Email address</label>
+          <input id="email-home" type="email" class="newsletter-input" placeholder="Email Address" required
+            autocomplete="email" />
+          <button type="submit" class="newsletter-submit">Subscribe to the Collective</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div>© 2025 Velvet Crema</div>
+      <nav class="site-footer__links" aria-label="Legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sustainability</a>
+      </nav>
+      <nav class="site-footer__social" aria-label="Social">
+        <a href="#">Instagram</a>
+        <a href="#">Vimeo</a>
+      </nav>
+    </footer>
+
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="index.html" class="bottom-nav__item active" aria-current="page">
+      <span class="material-symbols-outlined">home_max</span>Home
+    </a>
+    <a href="pages/boutique.html" class="bottom-nav__item">
+      <span class="material-symbols-outlined">local_cafe</span>Boutique
+    </a>
+    <a href="pages/journal.html" class="bottom-nav__item">
+      <span class="material-symbols-outlined">menu_book</span>Journal
+    </a>
+    <a href="pages/cart.html" class="bottom-nav__item" style="position:relative">
+      <span class="material-symbols-outlined">shopping_cart</span>Cart
+      <span class="bottom-nav__badge">2</span>
+    </a>
+  </nav>
+
+  <!-- Floating Action Button -->
+  <button class="fab" aria-label="Open concierge">
+    <span class="material-symbols-outlined">coffee_maker</span>
+    <span class="fab__tooltip">Concierge</span>
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

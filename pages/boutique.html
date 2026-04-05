@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velvet Crema — The Boutique</title>
+  <meta name="description"
+    content="A curated collection of sensory excellence. From high-altitude volcanic soils to the precision of gold-standard brewing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@300;400;600;800&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* Boutique bento layout */
+    .boutique-bento {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    @media (min-width: 768px) {
+      .boutique-bento {
+        grid-template-columns: repeat(12, 1fr);
+        height: 600px;
+      }
+
+      .b-main {
+        grid-column: span 8;
+      }
+
+      .b-side {
+        grid-column: span 4;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+
+    .b-featured {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface-container-low);
+      border-radius: var(--radius);
+      min-height: 24rem;
+    }
+
+    .b-featured img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+      transition: transform 0.8s ease;
+    }
+
+    .b-featured:hover img {
+      transform: scale(1.05);
+    }
+
+    .b-featured__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, transparent 55%);
+    }
+
+    .b-featured__content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2.5rem;
+    }
+
+    @media (min-width: 1024px) {
+      .b-featured__content {
+        padding: 3rem;
+      }
+    }
+
+    .b-info-card {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(32, 32, 31, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 1.25rem;
+      border: 1px solid rgba(79, 69, 64, 0.2);
+      border-radius: var(--radius);
+      max-width: 180px;
+    }
+
+    .b-info-card__row {
+      margin-bottom: 1rem;
+    }
+
+    .b-info-card__label {
+      font-size: 0.5rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--outline);
+      margin-bottom: 0.25rem;
+    }
+
+    .b-info-card__val {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Nav -->
+  <header class="top-nav" role="banner">
+    <div style="display:flex;align-items:center;gap:2rem">
+      <button class="top-nav__icon-btn hamburger" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+    <a href="../index.html" class="top-nav__logo">Velvet Crema</a>
+    <div class="top-nav__actions">
+      <nav class="top-nav__links" style="display:none" aria-label="Primary">
+        <a href="../index.html" class="top-nav__link">Home</a>
+        <a href="boutique.html" class="top-nav__link active" aria-current="page">Boutique</a>
+        <a href="product.html" class="top-nav__link">Origin</a>
+        <a href="membership.html" class="top-nav__link">Membership</a>
+      </nav>
+      <button class="top-nav__icon-btn" aria-label="Search">
+        <span class="material-symbols-outlined">search</span>
+      </button>
+      <a href="cart.html" class="top-nav__icon-btn primary-icon" aria-label="Cart" style="position:relative">
+        <span class="material-symbols-outlined">shopping_bag</span>
+        <span
+          style="position:absolute;top:-4px;right:-4px;background:var(--primary);color:var(--on-primary);font-size:0.5rem;font-weight:700;width:1rem;height:1rem;display:flex;align-items:center;justify-content:center;border-radius:50%">2</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container" style="padding-top:3rem">
+
+      <!-- Page Header -->
+      <header style="margin-bottom:3rem">
+        <h1 class="font-headline"
+          style="font-size:clamp(2.5rem,7vw,5rem);font-weight:300;letter-spacing:-0.02em;margin-bottom:1rem">
+          The Boutique
+        </h1>
+        <p style="color:var(--on-surface-variant);max-width:36rem;font-weight:300;line-height:1.65;font-size:1.05rem">
+          A curated collection of sensory excellence. From high-altitude volcanic soils to the precision of
+          gold-standard brewing.
+        </p>
+      </header>
+
+      <!-- Category Navigation -->
+      <nav class="category-nav" aria-label="Product categories" style="margin-bottom:3rem">
+        <button class="category-pill active" data-filter="all">All Origins</button>
+        <button class="category-pill" data-filter="india">India</button>
+        <button class="category-pill" data-filter="china">China</button>
+        <button class="category-pill" data-filter="america">America</button>
+        <button class="category-pill" data-filter="japan">Japan</button>
+        <button class="category-pill" data-filter="russia">Russia</button>
+      </nav>
+
+      <!-- Featured Bento Grid -->
+      <div class="boutique-bento">
+        <!-- Large Feature -->
+        <div class="b-featured b-main">
+          <img src="https://i.pinimg.com/1200x/21/e4/41/21e441d6af58f64c8d082ffc69fbd3b0.jpg"
+            alt="Ethiopian Yirgacheffe G1 — glossy dark espresso beans on black slate" />
+          <div class="b-featured__overlay"></div>
+          <div class="b-featured__content">
+            <span class="label-caps text-primary" style="display:block;margin-bottom:0.75rem">Origin Spotlight</span>
+            <h2 class="font-headline" style="font-size:clamp(1.5rem,3vw,2.75rem);font-weight:300;margin-bottom:1rem">
+              Ethiopian Yirgacheffe G1
+            </h2>
+            <p
+              style="color:var(--on-surface-variant);margin-bottom:1.5rem;max-width:30rem;font-weight:300;font-size:0.95rem">
+              Notes of Jasmine, Lemon Zest, and Wild Honey. Roasted to a delicate medium to preserve floral complexity.
+            </p>
+            <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+              <span class="font-headline" style="font-size:1.75rem;color:var(--primary)">$42.00</span>
+              <a href="product.html" class="btn btn-primary btn-sm">Acquire Now</a>
+            </div>
+          </div>
+          <!-- Info overlay -->
+          <div class="b-info-card">
+            <div class="b-info-card__row">
+              <div class="b-info-card__label">Roast Profile</div>
+              <div class="b-info-card__val">Light-Medium</div>
+            </div>
+            <div class="b-info-card__row" style="margin-bottom:0">
+              <div class="b-info-card__label">Altitude</div>
+              <div class="b-info-card__val">1,900–2,200m</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side cards -->
+        <div class="b-side">
+          <div class="side-card" style="flex:1">
+            <img class="side-card__img" src="https://i.pinimg.com/736x/e9/b7/e5/e9b7e596d74785a154e8634f7f841937.jpg"
+              alt="Matte black gooseneck kettle on dark wood" />
+            <div class="side-card__content">
+              <h3 class="side-card__title">The Monarch Kettle</h3>
+              <p class="side-card__text">Precision pouring for the ritualistic brewer.</p>
+              <p class="side-card__price">$185.00</p>
+              <button class="top-nav__icon-btn primary-icon" onclick="addToCart('The Monarch Kettle', 185, event)"
+                aria-label="Add Monarch Kettle to cart">
+                <span class="material-symbols-outlined">add_circle</span>
+              </button>
+            </div>
+          </div>
+          <div class="side-card" style="flex:1">
+            <img class="side-card__img" src="https://i.pinimg.com/1200x/ed/ab/28/edab28b203767e5f00a326b33bd5bb87.jpg"
+              alt="Luxury coffee gift set in black box with gold foil" />
+            <div class="side-card__content">
+              <h3 class="side-card__title">Midnight Taster Set</h3>
+              <p class="side-card__text">Three rare microlots in 100g editorial tins.</p>
+              <p class="side-card__price">$68.00</p>
+              <button class="top-nav__icon-btn primary-icon" onclick="addToCart('Midnight Taster Set', 68, event)"
+                aria-label="Add Midnight Taster Set to cart">
+                <span class="material-symbols-outlined">add_circle</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signature Collection -->
+      <div
+        style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;gap:1rem;flex-wrap:wrap">
+        <h2 class="font-headline" style="font-size:clamp(1.5rem,3vw,2rem);font-weight:300">Signature Collection</h2>
+        <div style="display:flex;gap:1rem">
+          <button class="top-nav__icon-btn" aria-label="Grid view">
+            <span class="material-symbols-outlined">grid_view</span>
+          </button>
+          <button class="top-nav__icon-btn" aria-label="List view">
+            <span class="material-symbols-outlined">view_list</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="product-grid" style="margin-bottom:4rem">
+
+        <!-- India: Monsooned Malabar -->
+        <article class="product-card animate-fade-up" data-category="india">
+          <div class="product-card__image-wrap" style="aspect-ratio:3/4">
+            <img src="https://i.pinimg.com/736x/b5/9b/04/b59b044fe9f483ff7b7bfb2b6d59f9c8.jpg" alt="Monsooned Malabar"
+              loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Monsooned Malabar', 42, event)">Quick
+                Add</button>
+            </div>
+          </div>
+          <div class="product-card__info" style="gap:0.25rem">
+            <h3 class="product-card__name">Monsooned Malabar</h3>
+            <p
+              style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--on-surface-variant);font-weight:300">
+              India · Earthy & Deep</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$42.00</span>
+              <button class="product-card__fav"><span class="material-symbols-outlined">favorite</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- India: Coorg Coffee -->
+        <article class="product-card animate-fade-up animate-fade-up-1" data-category="india">
+          <div class="product-card__image-wrap" style="aspect-ratio:3/4">
+            <img src="../assets/images/india_coorg_1775376824367.png" alt="Coorg Coffee" loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Coorg Coffee', 38, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info" style="gap:0.25rem">
+            <h3 class="product-card__name">Coorg Coffee</h3>
+            <p
+              style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--on-surface-variant);font-weight:300">
+              India · Peaberry Bean</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$38.00</span>
+              <button class="product-card__fav"><span class="material-symbols-outlined">favorite</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- China: Yunnan Coffee -->
+        <article class="product-card animate-fade-up animate-fade-up-2" data-category="china">
+          <div class="product-card__image-wrap" style="aspect-ratio:3/4">
+            <img src="https://i.pinimg.com/736x/63/0e/b0/630eb0cae89a3c69256d074cf6e077f1.jpg" alt="Yunnan Coffee"
+              loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Yunnan Coffee', 48, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info" style="gap:0.25rem">
+            <h3 class="product-card__name">Yunnan Coffee</h3>
+            <p
+              style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--on-surface-variant);font-weight:300">
+              China · Sweet & Tea-Like</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$48.00</span>
+              <button class="product-card__fav"><span class="material-symbols-outlined">favorite</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- America: Seattle Blend -->
+        <article class="product-card animate-fade-up animate-fade-up-3" data-category="america">
+          <div class="product-card__image-wrap" style="aspect-ratio:3/4">
+            <img src="../assets/images/coffee_hero_1775374671404.png" alt="Seattle Blend" loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Seattle Blend', 35, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info" style="gap:0.25rem">
+            <h3 class="product-card__name">Seattle Blend</h3>
+            <p
+              style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--on-surface-variant);font-weight:300">
+              America · Bold Roaster</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$35.00</span>
+              <button class="product-card__fav"><span class="material-symbols-outlined">favorite</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- America: Cold Brew -->
+        <article class="product-card animate-fade-up animate-fade-up-4" data-category="america">
+          <div class="product-card__image-wrap" style="aspect-ratio:3/4">
+            <img src="https://i.pinimg.com/736x/76/fd/12/76fd12962ed0b18f93b1baa67f456a5a.jpg" alt="Cold Brew"
+              loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Cold Brew', 28, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info" style="gap:0.25rem">
+            <h3 class="product-card__name">Cold Brew Reserve</h3>
+            <p
+              style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--on-surface-variant);font-weight:300">
+              America · 24Hr Steep</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$28.00</span>
+              <button class="product-card__fav"><span class="material-symbols-outlined">favorite</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Japan: Kyoto Coffee -->
+        <article class="product-card animate-fade-up" data-category="japan">
+          <div class="product-card__image-wrap" style="aspect-ratio:3/4">
+            <img src="../assets/images/coffee_accessories_1775375095577.png" alt="Kyoto Coffee" loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Kyoto Coffee', 55, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info" style="gap:0.25rem">
+            <h3 class="product-card__name">Kyoto Coffee</h3>
+            <p
+              style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--on-surface-variant);font-weight:300">
+              Japan · Slow Drip Method</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$55.00</span>
+              <button class="product-card__fav"><span class="material-symbols-outlined">favorite</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Japan: V60 Pour Over -->
+        <article class="product-card animate-fade-up animate-fade-up-1" data-category="japan">
+          <div class="product-card__image-wrap" style="aspect-ratio:3/4">
+            <img src="https://i.pinimg.com/1200x/5d/ad/db/5daddb28f95bee839de5dd97c6e9533b.jpg" alt="V60 Pour Over Kit"
+              loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('V60 Pour Over Kit', 85, event)">Quick
+                Add</button>
+            </div>
+          </div>
+          <div class="product-card__info" style="gap:0.25rem">
+            <h3 class="product-card__name">V60 Pour Over</h3>
+            <p
+              style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--on-surface-variant);font-weight:300">
+              Japan · Precision Brewer</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$85.00</span>
+              <button class="product-card__fav"><span class="material-symbols-outlined">favorite</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Russia: Russian Black Coffee -->
+        <article class="product-card animate-fade-up animate-fade-up-2" data-category="russia">
+          <div class="product-card__image-wrap" style="aspect-ratio:3/4">
+            <img src="https://i.pinimg.com/1200x/6a/e4/82/6ae482a0690b8ca89fd3acd554a36d66.jpg"
+              alt="Russian Black Coffee" loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Russian Black', 32, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info" style="gap:0.25rem">
+            <h3 class="product-card__name">Russian Black</h3>
+            <p
+              style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--on-surface-variant);font-weight:300">
+              Russia · Dark & Bold</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$32.00</span>
+              <button class="product-card__fav"><span class="material-symbols-outlined">favorite</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Russia: Raf Coffee -->
+        <article class="product-card animate-fade-up animate-fade-up-3" data-category="russia">
+          <div class="product-card__image-wrap" style="aspect-ratio:3/4">
+            <img src="../assets/images/coffee_hero_1775374671404.png" alt="Raf Coffee" loading="lazy" />
+            <div class="product-card__overlay">
+              <button class="btn btn-primary btn-sm" onclick="addToCart('Raf Coffee', 40, event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-card__info" style="gap:0.25rem">
+            <h3 class="product-card__name">Raf Coffee</h3>
+            <p
+              style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--on-surface-variant);font-weight:300">
+              Russia · Vanilla Sweetned</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$40.00</span>
+              <button class="product-card__fav"><span class="material-symbols-outlined">favorite</span></button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div>© 2025 Velvet Crema</div>
+      <nav class="site-footer__links" aria-label="Legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sustainability</a>
+      </nav>
+      <nav class="site-footer__social" aria-label="Social">
+        <a href="#">Instagram</a>
+        <a href="#">Vimeo</a>
+      </nav>
+    </footer>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="../index.html" class="bottom-nav__item">
+      <span class="material-symbols-outlined">home_max</span>Home
+    </a>
+    <a href="boutique.html" class="bottom-nav__item active" aria-current="page">
+      <span class="material-symbols-outlined">local_cafe</span>Boutique
+    </a>
+    <a href="journal.html" class="bottom-nav__item">
+      <span class="material-symbols-outlined">menu_book</span>Journal
+    </a>
+    <a href="cart.html" class="bottom-nav__item" style="position:relative">
+      <span class="material-symbols-outlined">shopping_cart</span>Cart
+      <span class="bottom-nav__badge">2</span>
+    </a>
+  </nav>
+
+  <button class="fab" aria-label="Concierge">
+    <span class="material-symbols-outlined">coffee_maker</span>
+    <span class="fab__tooltip">Concierge</span>
+  </button>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

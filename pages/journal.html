@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velvet Crema — The Journal</title>
+  <meta name="description"
+    content="Stories from the source. Explore the origins, craft, and philosophy behind every Velvet Crema cup." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <style>
+    /* ═══════════════════════════════════════════
+       JOURNAL — Page Variables & Resets
+    ═══════════════════════════════════════════ */
+    :root {
+      --gold: #d4af55;
+      --gold-dim: rgba(212, 175, 85, 0.18);
+      --gold-line: rgba(212, 175, 85, 0.25);
+      --ink: #0b0a08;
+      --surface-j: #111009;
+      --text-dim: rgba(234, 220, 190, 0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* ── Section base reveal ── */
+    .j-reveal {
+      opacity: 0;
+      transform: translateY(3.5rem);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .j-reveal.visible { opacity: 1; transform: translateY(0); }
+    .j-reveal-left {
+      opacity: 0;
+      transform: translateX(-3rem);
+      transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .j-reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .j-reveal-right {
+      opacity: 0;
+      transform: translateX(3rem);
+      transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .j-reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* Stagger children */
+    .j-stagger > * { transition-delay: calc(var(--i, 0) * 0.12s); }
+
+    /* ═══════════════════════════════════════════
+       1. HERO
+    ═══════════════════════════════════════════ */
+    .j-hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    .j-hero__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://w0.peakpx.com/wallpaper/259/841/HD-wallpaper-coffee-beans-coffee-beans-hot-smoke-dark-background.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.35;
+      transform: scale(1.08);
+      animation: heroZoom 14s ease-out forwards;
+    }
+    @keyframes heroZoom {
+      to { transform: scale(1); opacity: 0.28; }
+    }
+
+    /* Layered vignette */
+    .j-hero__vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, rgba(0,0,0,0.65) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.85) 100%);
+    }
+
+    .j-hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 44rem;
+      padding: 0 2rem;
+    }
+
+    .j-hero__eyebrow {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+
+    .j-hero__title {
+      font-family: 'Playfair Display', 'Noto Serif', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: #fff;
+      margin: 0 0 2rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s 0.65s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .j-hero__title em { color: var(--gold); font-style: italic; }
+
+    .j-hero__sub {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--text-dim);
+      font-weight: 300;
+      line-height: 1.7;
+      margin: 0 0 3rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s 0.85s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+
+    .j-hero__scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s ease forwards;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .j-hero__scroll span {
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .j-hero__scroll-line {
+      width: 1px; height: 3rem;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(2rem); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Gold rule separator */
+    .j-rule {
+      width: 3rem; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto;
+    }
+
+    /* ═══════════════════════════════════════════
+       2. INTRO STATEMENT
+    ═══════════════════════════════════════════ */
+    .j-statement {
+      background: var(--ink);
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+    .j-statement__quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+      max-width: 42rem;
+      margin: 0 auto 1.5rem;
+      line-height: 1.5;
+    }
+    .j-statement__attr {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ═══════════════════════════════════════════
+       SHARED SPLIT LAYOUT
+    ═══════════════════════════════════════════ */
+    .j-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 85vh;
+    }
+    @media (min-width: 900px) {
+      .j-split { grid-template-columns: 1fr 1fr; }
+      .j-split--reverse .j-split__img { order: 2; }
+      .j-split--reverse .j-split__body { order: 1; }
+    }
+
+    .j-split__img {
+      position: relative;
+      min-height: 50vw;
+      overflow: hidden;
+    }
+    @media (min-width: 900px) { .j-split__img { min-height: unset; } }
+
+    .j-split__img img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .j-split__img:hover img { transform: scale(1.04); }
+
+    .j-split__img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.35) 0%, transparent 60%);
+    }
+
+    .j-split__body {
+      background: #100e09;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem);
+    }
+
+    .j-split__num {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--gold-dim);
+      line-height: 1;
+      margin-bottom: -1rem;
+      letter-spacing: -0.02em;
+    }
+    .j-split__tag {
+      font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .j-split__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: #fff;
+      margin: 0 0 1.5rem;
+      line-height: 1.2;
+    }
+    .j-split__title em { color: var(--gold); font-style: italic; }
+    .j-split__text {
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      color: var(--text-dim);
+      line-height: 1.85;
+      font-weight: 300;
+      margin: 0 0 2.5rem;
+      max-width: 36rem;
+    }
+    .j-split__detail {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      border-top: 1px solid var(--gold-line);
+      padding-top: 2rem;
+      max-width: 26rem;
+    }
+    .j-split__detail-label {
+      font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.35rem;
+    }
+    .j-split__detail-val {
+      font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.8);
+    }
+
+    /* ═══════════════════════════════════════════
+       3. PARALLAX ROAST SECTION
+    ═══════════════════════════════════════════ */
+    .j-parallax {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .j-parallax__bg {
+      position: absolute;
+      inset: -15%;
+      background-image: url('https://i.pinimg.com/736x/a3/3a/82/a33a82c5aefa0e21d3fd57b785fa0f30.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.45;
+      will-change: transform;
+    }
+    .j-parallax__overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, var(--ink) 0%, rgba(11,10,8,0.55) 30%,
+                        rgba(11,10,8,0.55) 70%, var(--ink) 100%);
+    }
+    .j-parallax__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 52rem;
+      padding: 6rem 2rem;
+    }
+    .j-parallax__num {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 2rem;
+    }
+    .j-parallax__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.25rem, 5vw, 4.5rem);
+      font-weight: 300; color: #fff;
+      margin: 0 0 1rem; line-height: 1.1;
+    }
+    .j-parallax__title em { color: var(--gold); font-style: italic; }
+    .j-parallax__sub {
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      color: var(--text-dim); font-weight: 300; line-height: 1.8;
+      max-width: 36rem; margin: 0 auto 3.5rem;
+    }
+    .j-parallax__stats {
+      display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
+      border-top: 1px solid var(--gold-line);
+      padding-top: 3rem;
+    }
+    .j-stat__val {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem; font-weight: 300; color: var(--gold);
+      display: block; line-height: 1;
+    }
+    .j-stat__label {
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-dim); margin-top: 0.5rem; display: block;
+    }
+
+    /* ═══════════════════════════════════════════
+       5. PHILOSOPHY / CLOSING
+    ═══════════════════════════════════════════ */
+    .j-philosophy {
+      background: var(--ink);
+      padding: clamp(5rem, 10vw, 9rem) 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .j-philosophy::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(212,175,85,0.07) 0%, transparent 55%),
+        radial-gradient(circle at 80% 100%, rgba(212,175,85,0.06) 0%, transparent 55%);
+    }
+    .j-philosophy__inner {
+      position: relative; z-index: 2;
+      max-width: 44rem; margin: 0 auto;
+    }
+    .j-philosophy__num {
+      font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 2rem;
+    }
+    .j-philosophy__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 300; color: #fff; margin: 0 0 2rem;
+      line-height: 1.15;
+    }
+    .j-philosophy__title em { color: var(--gold); font-style: italic; }
+    .j-philosophy__body {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: var(--text-dim); font-weight: 300; line-height: 1.9;
+      margin: 0 0 3rem;
+    }
+    .j-philosophy__pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem; margin-top: 4rem;
+    }
+    .j-pillar {
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--gold-line);
+      border-radius: 0.75rem;
+      background: rgba(212,175,85,0.04);
+      text-align: center;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s;
+    }
+    .j-pillar:hover {
+      border-color: rgba(212,175,85,0.5);
+      background: rgba(212,175,85,0.08);
+      transform: translateY(-4px);
+    }
+    .j-pillar__icon {
+      font-size: 1.75rem; margin-bottom: 1rem; display: block;
+    }
+    .j-pillar__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .j-pillar__desc {
+      font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; font-weight: 300;
+    }
+
+    /* ═══════════════════════════════════════════
+       PROGRESS BAR
+    ═══════════════════════════════════════════ */
+    .j-progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: linear-gradient(to right, #6b3a1f, var(--gold), #c07d28);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ═══════════════════════════════════════════
+       CHAPTER NAVIGATION (side dots)
+    ═══════════════════════════════════════════ */
+    .j-chapter-nav {
+      position: fixed;
+      right: 1.5rem; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 0.75rem;
+      z-index: 500;
+    }
+    @media (max-width: 768px) { .j-chapter-nav { display: none; } }
+    .j-chapter-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(212,175,85,0.3);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none; padding: 0;
+    }
+    .j-chapter-dot.active {
+      background: var(--gold);
+      transform: scale(1.6);
+    }
+    .j-chapter-dot:hover { background: var(--gold); }
+
+    /* ═══════════════════════════════════════════
+       MOBILE ADJUSTMENTS
+    ═══════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      .j-split__detail { grid-template-columns: 1fr 1fr; }
+      .j-parallax__stats { gap: 2rem; }
+    }
+
+    /* ── Hide bottom nav on desktop for journal ── */
+    @media (min-width: 768px) {
+      .bottom-nav { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div class="j-progress" id="jProgress"></div>
+
+  <!-- Chapter Navigation Dots -->
+  <nav class="j-chapter-nav" aria-label="Journal chapters">
+    <button class="j-chapter-dot active" data-target="j-hero" title="Intro"></button>
+    <button class="j-chapter-dot" data-target="j-origins" title="Origins"></button>
+    <button class="j-chapter-dot" data-target="j-roast" title="Roasting"></button>
+    <button class="j-chapter-dot" data-target="j-brew" title="Brewing"></button>
+    <button class="j-chapter-dot" data-target="j-philosophy" title="Philosophy"></button>
+  </nav>
+
+  <!-- ── TOP NAVIGATION ── -->
+  <header class="top-nav" role="banner">
+    <div style="display:flex;align-items:center;gap:2.5rem">
+      <button class="top-nav__icon-btn hamburger" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <nav class="top-nav__links" aria-label="Primary">
+        <a href="../pages/boutique.html" class="top-nav__link">Boutique</a>
+        <a href="#" class="top-nav__link">Our Roastery</a>
+      </nav>
+    </div>
+
+    <a href="../index.html" class="top-nav__logo" aria-label="Velvet Crema home">Velvet Crema</a>
+
+    <div style="display:flex;align-items:center;gap:1.5rem">
+      <nav class="top-nav__links" aria-label="Secondary">
+        <a href="journal.html" class="top-nav__link active" aria-current="page">Journal</a>
+        <a href="membership.html" class="top-nav__link">Membership</a>
+      </nav>
+      <div class="top-nav__actions">
+        <button class="top-nav__icon-btn" aria-label="Search">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+        <a href="cart.html" class="top-nav__icon-btn primary-icon" aria-label="Shopping bag"
+          style="position:relative">
+          <span class="material-symbols-outlined">shopping_bag</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content" style="padding-top:0">
+
+    <!-- ═══════════════════════════════════════
+         1. HERO
+    ═══════════════════════════════════════ -->
+    <section class="j-hero" id="j-hero">
+      <div class="j-hero__bg"></div>
+      <div class="j-hero__vignette"></div>
+
+      <div class="j-hero__content">
+        <span class="j-hero__eyebrow">The Velvet Crema Journal</span>
+        <h1 class="j-hero__title">
+          Stories from<br><em>the Source</em>
+        </h1>
+        <p class="j-hero__sub">
+          Every cup holds a journey — from volcanic highlands to slow morning rituals.
+          This is where we tell those stories.
+        </p>
+        <div class="j-rule"></div>
+      </div>
+
+      <div class="j-hero__scroll" onclick="document.getElementById('j-origins').scrollIntoView({behavior:'smooth'})">
+        <span>Scroll</span>
+        <div class="j-hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ── Opening Statement ── -->
+    <div class="j-statement">
+      <p class="j-statement__quote j-reveal">
+        "Coffee is not a morning necessity. It is a midnight contemplation —
+        a sensory journey that begins long before the first sip."
+      </p>
+      <span class="j-statement__attr j-reveal" style="transition-delay:0.15s">— The Sommelier</span>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         2. ORIGINS
+    ═══════════════════════════════════════ -->
+    <section class="j-split" id="j-origins">
+      <!-- Image -->
+      <div class="j-split__img j-reveal-left">
+        <img src="https://i.pinimg.com/1200x/21/e4/41/21e441d6af58f64c8d082ffc69fbd3b0.jpg"
+          alt="Ethiopian coffee origin highlands" loading="lazy" />
+        <div class="j-split__img-overlay"></div>
+      </div>
+      <!-- Body -->
+      <div class="j-split__body">
+        <div class="j-stagger j-reveal-right">
+          <div class="j-split__num" style="--i:0">01</div>
+          <div class="j-split__tag" style="--i:1">Coffee Origins</div>
+          <h2 class="j-split__title" style="--i:2">
+            Born in the<br><em>Highland Mist</em>
+          </h2>
+          <p class="j-split__text" style="--i:3">
+            Altitude is everything. At 1,900 metres above sea level, where clouds pool
+            in the valleys each morning, the Yirgacheffe cherries ripen slowly —
+            developing the floral jasmine and bright citrus complexity that defines our
+            most celebrated roast. The soil remembers every rain, every drought,
+            every season of patience.
+          </p>
+          <p class="j-split__text" style="--i:4;margin-bottom:0">
+            We source exclusively from smallholder farms, where each lot is picked by
+            hand and sun-dried on raised African beds. Traceability is not a marketing
+            term here — it is a promise kept, harvest after harvest.
+          </p>
+          <div class="j-split__detail" style="--i:5">
+            <div>
+              <div class="j-split__detail-label">Region</div>
+              <div class="j-split__detail-val">Yirgacheffe, Ethiopia</div>
+            </div>
+            <div>
+              <div class="j-split__detail-label">Altitude</div>
+              <div class="j-split__detail-val">1,900 – 2,200m</div>
+            </div>
+            <div>
+              <div class="j-split__detail-label">Process</div>
+              <div class="j-split__detail-val">Natural Sun-Dried</div>
+            </div>
+            <div>
+              <div class="j-split__detail-label">Harvest</div>
+              <div class="j-split__detail-val">Oct – Jan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         3. ROASTING — PARALLAX
+    ═══════════════════════════════════════ -->
+    <section class="j-parallax" id="j-roast">
+      <div class="j-parallax__bg" id="jParallaxBg"></div>
+      <div class="j-parallax__overlay"></div>
+      <div class="j-parallax__content">
+        <span class="j-parallax__num j-reveal" style="--i:0">Chapter 02 — Roasting Alchemy</span>
+        <div class="j-rule j-reveal" style="--i:1;margin-bottom:2rem"></div>
+        <h2 class="j-parallax__title j-reveal" style="--i:2">
+          Heat Transforms<br><em>Potential into Identity</em>
+        </h2>
+        <p class="j-parallax__sub j-reveal" style="--i:3">
+          Our roasters are not technicians — they are translators. They read
+          the crack, the colour, and the scent to coax out a flavour profile
+          that no machine algorithm can replicate. Each roast is a conversation
+          between fire and intention.
+        </p>
+        <div class="j-parallax__stats j-reveal" style="--i:4">
+          <div>
+            <span class="j-stat__val">204°</span>
+            <span class="j-stat__label">First Crack °C</span>
+          </div>
+          <div>
+            <span class="j-stat__val">12 min</span>
+            <span class="j-stat__label">Avg. Roast Time</span>
+          </div>
+          <div>
+            <span class="j-stat__val">48 hr</span>
+            <span class="j-stat__label">Degassing Rest</span>
+          </div>
+          <div>
+            <span class="j-stat__val">100%</span>
+            <span class="j-stat__label">Small Batch</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         4. BREWING — SPLIT REVERSE
+    ═══════════════════════════════════════ -->
+    <section class="j-split j-split--reverse" id="j-brew">
+      <!-- Image -->
+      <div class="j-split__img j-reveal-right">
+        <img src="https://i.pinimg.com/736x/e9/b7/e5/e9b7e596d74785a154e8634f7f841937.jpg"
+          alt="Gooseneck kettle pour over brewing ritual" loading="lazy" />
+        <div class="j-split__img-overlay" style="background:linear-gradient(225deg,rgba(0,0,0,0.35)0%,transparent 60%)"></div>
+      </div>
+      <!-- Body -->
+      <div class="j-split__body">
+        <div class="j-stagger j-reveal-left">
+          <div class="j-split__num" style="--i:0">03</div>
+          <div class="j-split__tag" style="--i:1">Brewing Ritual</div>
+          <h2 class="j-split__title" style="--i:2">
+            Slow Pour.<br><em>Silent Morning.</em>
+          </h2>
+          <p class="j-split__text" style="--i:3">
+            The pour-over is not a technique — it is a meditation. The gooseneck
+            arc of water over freshly ground bloom. The 30-second pause as the
+            bed exhales its gases. The spiral pour that coaxes flavour evenly
+            from every particle. Time slows here. Intentionally.
+          </p>
+          <p class="j-split__text" style="--i:4;margin-bottom:0">
+            We recommend a 1:15 ratio — one gram of coffee to fifteen grams of
+            water at 93°C — as a starting point for exploration. But ultimately,
+            the perfect cup lives in your own ritual, refined brew by brew.
+          </p>
+          <div class="j-split__detail" style="--i:5">
+            <div>
+              <div class="j-split__detail-label">Method</div>
+              <div class="j-split__detail-val">V60 / Pour-Over</div>
+            </div>
+            <div>
+              <div class="j-split__detail-label">Ratio</div>
+              <div class="j-split__detail-val">1 : 15</div>
+            </div>
+            <div>
+              <div class="j-split__detail-label">Water Temp</div>
+              <div class="j-split__detail-val">92 – 94°C</div>
+            </div>
+            <div>
+              <div class="j-split__detail-label">Brew Time</div>
+              <div class="j-split__detail-val">3 – 3.5 min</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         5. PHILOSOPHY
+    ═══════════════════════════════════════ -->
+    <section class="j-philosophy" id="j-philosophy">
+      <div class="j-philosophy__inner">
+        <span class="j-philosophy__num j-reveal">Chapter 04 — Brand Philosophy</span>
+        <div class="j-rule j-reveal" style="margin-bottom:2.5rem;transition-delay:0.1s"></div>
+        <h2 class="j-philosophy__title j-reveal" style="transition-delay:0.18s">
+          At the Intersection of<br><em>Craft & Emotion</em>
+        </h2>
+        <p class="j-philosophy__body j-reveal" style="transition-delay:0.26s">
+          Velvet Crema was born from a simple but profound conviction: that
+          coffee, at its highest expression, is an art form. Not one that demands
+          reverence from afar — but one that invites you inward, into its warmth,
+          its complexity, its quiet ceremony.
+        </p>
+        <p class="j-philosophy__body j-reveal" style="transition-delay:0.34s">
+          Every decision we make — the farms we source from, the temperature
+          curves we coax our roasters through, the vessels we choose to deliver
+          your beans in — is guided by one question: <em style="color:var(--gold)">Does this honour the cup?</em>
+        </p>
+
+        <div class="j-philosophy__pillars">
+          <div class="j-pillar j-reveal" style="transition-delay:0.1s">
+            <span class="j-pillar__icon">🌱</span>
+            <div class="j-pillar__name">Origin</div>
+            <p class="j-pillar__desc">Direct relationships with smallholder farmers. Traced to the exact hillside.</p>
+          </div>
+          <div class="j-pillar j-reveal" style="transition-delay:0.2s">
+            <span class="j-pillar__icon">🔥</span>
+            <div class="j-pillar__name">Craft</div>
+            <p class="j-pillar__desc">Every roast is a dialogue between heat and potential. No shortcuts, ever.</p>
+          </div>
+          <div class="j-pillar j-reveal" style="transition-delay:0.3s">
+            <span class="j-pillar__icon">✨</span>
+            <div class="j-pillar__name">Ritual</div>
+            <p class="j-pillar__desc">The act of brewing is as sacred as the cup itself. We design for that moment.</p>
+          </div>
+          <div class="j-pillar j-reveal" style="transition-delay:0.4s">
+            <span class="j-pillar__icon">♻️</span>
+            <div class="j-pillar__name">Stewardship</div>
+            <p class="j-pillar__desc">1% of every sale funds regenerative farming practices at origin.</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="j-reveal" style="margin-top:4rem;transition-delay:0.5s">
+          <div class="j-rule" style="margin-bottom:3rem"></div>
+          <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem">
+            Begin Your Ritual
+          </p>
+          <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+            <a href="boutique.html" class="btn btn-primary">Explore the Boutique</a>
+            <a href="membership.html" class="btn btn-outline">Join the Collective</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer" role="contentinfo">
+    <div>© 2025 Velvet Crema</div>
+    <nav class="site-footer__links" aria-label="Legal">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Sustainability</a>
+    </nav>
+    <nav class="site-footer__social" aria-label="Social">
+      <a href="#">Instagram</a>
+      <a href="#">Vimeo</a>
+    </nav>
+  </footer>
+
+  <!-- ── BOTTOM NAV (mobile) ── -->
+  <nav class="bottom-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="../index.html" class="bottom-nav__item">
+      <span class="material-symbols-outlined">home_max</span>Home
+    </a>
+    <a href="boutique.html" class="bottom-nav__item">
+      <span class="material-symbols-outlined">local_cafe</span>Boutique
+    </a>
+    <a href="journal.html" class="bottom-nav__item active" aria-current="page">
+      <span class="material-symbols-outlined">menu_book</span>Journal
+    </a>
+    <a href="cart.html" class="bottom-nav__item">
+      <span class="material-symbols-outlined">shopping_cart</span>Cart
+    </a>
+  </nav>
+
+  <script src="../js/main.js"></script>
+  <script>
+    /* ── Reading progress bar ── */
+    const jProgress = document.getElementById('jProgress');
+    function updateProgress() {
+      const scrolled = window.scrollY;
+      const total = document.body.scrollHeight - window.innerHeight;
+      jProgress.style.width = Math.min((scrolled / total) * 100, 100) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    /* ── Parallax background ── */
+    const parallaxBg = document.getElementById('jParallaxBg');
+    if (parallaxBg) {
+      window.addEventListener('scroll', () => {
+        const section = parallaxBg.closest('.j-parallax');
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        parallaxBg.style.transform = `translateY(${(progress - 0.5) * 14}%)`;
+      }, { passive: true });
+    }
+
+    /* ── Scroll reveal via IntersectionObserver ── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.j-reveal, .j-reveal-left, .j-reveal-right').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    /* ── Chapter navigation dots ── */
+    const sections = ['j-hero','j-origins','j-roast','j-brew','j-philosophy']
+      .map(id => document.getElementById(id));
+    const dots = document.querySelectorAll('.j-chapter-dot');
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const target = document.getElementById(dot.dataset.target);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    const chapterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = sections.indexOf(entry.target);
+          if (idx === -1) return;
+          dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => s && chapterObserver.observe(s));
+  </script>
+
+</body>
+</html>

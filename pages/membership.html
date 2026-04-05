@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velvet Crema — Membership</title>
+  <meta name="description" content="Join the Velvet Crema inner circle. Exclusive microlot access, brewing tutorials, and curated membership benefits." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* Membership tiers */
+    .tiers-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 640px) { .tiers-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .tier-card {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      transition: border-color var(--transition-base), transform var(--transition-base);
+      cursor: pointer;
+    }
+    .tier-card:hover { border-color: var(--primary); transform: translateY(-4px); }
+    .tier-card.featured {
+      border-color: var(--primary);
+      background: var(--primary-container);
+      position: relative;
+    }
+    .tier-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: var(--on-primary);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 1.25rem;
+      border-radius: 0 0 var(--radius-full) var(--radius-full);
+      white-space: nowrap;
+    }
+
+    .tier-card__name {
+      font-family: var(--font-headline);
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .tier-card__price {
+      font-family: var(--font-headline);
+      font-size: 2.5rem;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .tier-card__price span {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--on-surface-variant);
+      font-weight: 300;
+      margin-left: 0.25rem;
+    }
+
+    .tier-perks {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .tier-perk {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      font-weight: 300;
+    }
+
+    .tier-perk .material-symbols-outlined {
+      color: var(--primary);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    /* Benefits Section */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 768px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .benefits-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .benefit-card {
+      padding: 2rem;
+      background: var(--surface-container-low);
+      border-radius: var(--radius);
+      border-left: 2px solid rgba(233,195,73,0.25);
+      transition: border-color var(--transition-base);
+    }
+    .benefit-card:hover { border-color: var(--primary); }
+
+    .benefit-card__icon {
+      font-size: 2rem !important;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .benefit-card__title {
+      font-family: var(--font-headline);
+      font-size: 1.15rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+
+    .benefit-card__text {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .testimonial-card {
+      padding: 2rem;
+      background: var(--surface-container);
+      border-radius: var(--radius);
+    }
+
+    .testimonial-card__stars {
+      color: var(--primary);
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .testimonial-card__quote {
+      font-family: var(--font-headline);
+      font-size: 1rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--on-surface);
+      margin-bottom: 1.25rem;
+    }
+
+    .testimonial-card__author {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--outline);
+    }
+
+    /* Hero mini */
+    .membership-hero {
+      position: relative;
+      padding-top: var(--nav-height);
+      min-height: 75svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .membership-hero__bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+    }
+
+    .membership-hero__bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .membership-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(19,19,19,0.4), rgba(19,19,19,0.15), var(--background));
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top-nav" role="banner">
+    <div style="display:flex;align-items:center;gap:2rem">
+      <button class="top-nav__icon-btn hamburger" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+    <a href="../index.html" class="top-nav__logo">Velvet Crema</a>
+    <div class="top-nav__actions">
+      <nav class="top-nav__links" aria-label="Primary">
+        <a href="../index.html" class="top-nav__link">Home</a>
+        <a href="boutique.html" class="top-nav__link">Boutique</a>
+        <a href="membership.html" class="top-nav__link active" aria-current="page">Membership</a>
+      </nav>
+      <a href="cart.html" class="top-nav__icon-btn primary-icon" aria-label="Cart" style="position:relative">
+        <span class="material-symbols-outlined">shopping_bag</span>
+        <span style="position:absolute;top:-4px;right:-4px;background:var(--primary);color:var(--on-primary);font-size:0.5rem;font-weight:700;width:1rem;height:1rem;display:flex;align-items:center;justify-content:center;border-radius:50%">2</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- ═══ HERO ═══ -->
+    <section class="membership-hero" aria-label="Membership hero">
+      <div class="membership-hero__bg">
+        <img
+          src="https://lh3.googleusercontent.com/aidapublic/AB6AXuAS0g05RveyT99cGzFPX0yk9dWaUH3Nwtr4VowHtVdFzneB4DEcsKjS2gfl9wwh85nHS8CROdUVa7nLDmrBarPEoLANV0kYfjR3eCXtsTKr8cLobzRGRzVRA2245mVLfPT5yngWkxnJmdiIQ7xRWRQMCtVKLK9lVCrU-_rXRiXbeWQWKn3K2sV0OGBa5IEHchT172xNlg_cR89B67Iq7AGr1ALGI7zLCvzZWJg6gTq3PdFrNIEwzBQiqNyPjT63FOKNHJaFDeb0ROE"
+          alt="Premium latte art — ceramic cup, dark stone surface, dramatic lighting"
+          loading="eager"
+        />
+      </div>
+      <div class="membership-hero__overlay"></div>
+      <div style="position:relative;z-index:1;text-align:center;padding:0 1.5rem;max-width:52rem">
+        <span class="label-caps text-secondary" style="display:block;margin-bottom:1.5rem animate-pulse">The Inner Circle</span>
+        <h1 class="font-headline animate-fade-up" style="font-size:clamp(2.5rem,7vw,6rem);font-weight:300;line-height:1.05;margin-bottom:1.5rem">
+          Elevate Your<br /><em style="color:var(--primary)">Morning Ritual</em>
+        </h1>
+        <p class="animate-fade-up animate-fade-up-1" style="font-size:clamp(1rem,2vw,1.25rem);color:var(--on-surface-variant);font-weight:300;line-height:1.7;margin-bottom:2.5rem;max-width:38rem;margin-inline:auto">
+          Experience the velvet texture and deep aromatic profiles of our sommelier-selected beans, roasted to perfection in the heart of the city.
+        </p>
+        <div class="hero__actions animate-fade-up animate-fade-up-2">
+          <a href="#tiers" class="btn btn-primary">Join the Circle</a>
+          <button class="btn btn-outline">Our Story</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══ MEMBERSHIP TIERS ═══ -->
+    <section class="section-pad container" id="tiers" aria-labelledby="tiers-heading">
+      <div style="text-align:center;margin-bottom:4rem">
+        <h2 id="tiers-heading" class="font-headline" style="font-size:clamp(2rem,4vw,3rem);font-weight:300;margin-bottom:0.75rem">
+          Choose Your Ritual
+        </h2>
+        <p style="color:var(--on-surface-variant);font-weight:300;font-size:1.05rem">
+          Three tiers. One obsession.
+        </p>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="tiers-grid">
+
+        <!-- Tier 1: Obsidian -->
+        <div class="tier-card animate-fade-up">
+          <div>
+            <p class="label-caps text-secondary" style="margin-bottom:0.5rem">Entry</p>
+            <h3 class="tier-card__name">Obsidian</h3>
+          </div>
+          <div>
+            <div class="tier-card__price">$24<span>/ month</span></div>
+          </div>
+          <ul class="tier-perks">
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              200g single-origin bag monthly
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              Tasting notes &amp; brew guide
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              10% off all boutique orders
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              Members-only newsletter
+            </li>
+          </ul>
+          <button class="btn btn-outline" style="width:100%">Select Obsidian</button>
+        </div>
+
+        <!-- Tier 2: Velvet (Featured) -->
+        <div class="tier-card featured animate-fade-up animate-fade-up-1">
+          <div>
+            <p class="label-caps text-primary" style="margin-bottom:0.5rem">Premium</p>
+            <h3 class="tier-card__name">Velvet</h3>
+          </div>
+          <div>
+            <div class="tier-card__price">$48<span>/ month</span></div>
+          </div>
+          <ul class="tier-perks">
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              2× 250g curated micro-lots monthly
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              Exclusive pre-release access
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              15% off all boutique orders
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              Monthly sommelier video call
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              Priority shipping, free returns
+            </li>
+          </ul>
+          <button class="btn btn-primary" style="width:100%">Select Velvet</button>
+        </div>
+
+        <!-- Tier 3: Crema Noir -->
+        <div class="tier-card animate-fade-up animate-fade-up-2">
+          <div>
+            <p class="label-caps text-tertiary" style="margin-bottom:0.5rem">Connoisseur</p>
+            <h3 class="tier-card__name">Crema Noir</h3>
+          </div>
+          <div>
+            <div class="tier-card__price">$96<span>/ month</span></div>
+          </div>
+          <ul class="tier-perks">
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              4× 300g reserve micro-lots monthly
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              Dedicated sommelier concierge
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              20% off all boutique orders
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              Invitation to private roastery events
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              Bespoke bean blending service
+            </li>
+            <li class="tier-perk">
+              <span class="material-symbols-outlined">check</span>
+              Complimentary worldwide shipping
+            </li>
+          </ul>
+          <button class="btn btn-outline" style="width:100%">Select Crema Noir</button>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══ BENEFITS ═══ -->
+    <section class="section-pad" style="background:var(--surface-container-lowest)" aria-labelledby="benefits-heading">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:3.5rem">
+          <h2 id="benefits-heading" class="font-headline" style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:300">
+            Every Member Receives
+          </h2>
+          <div class="divider-line"></div>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card animate-fade-up">
+            <span class="material-symbols-outlined benefit-card__icon">local_shipping</span>
+            <h3 class="benefit-card__title">Priority Delivery</h3>
+            <p class="benefit-card__text">Beans roasted within 48 hours of dispatch. Always fresh, always on time.</p>
+          </div>
+          <div class="benefit-card animate-fade-up animate-fade-up-1">
+            <span class="material-symbols-outlined benefit-card__icon">school</span>
+            <h3 class="benefit-card__title">Brewing Masterclasses</h3>
+            <p class="benefit-card__text">Monthly video tutorials from world-class baristas and our in-house sommelier.</p>
+          </div>
+          <div class="benefit-card animate-fade-up animate-fade-up-2">
+            <span class="material-symbols-outlined benefit-card__icon">star</span>
+            <h3 class="benefit-card__title">Loyalty Points</h3>
+            <p class="benefit-card__text">Earn Velvet Points on every purchase, redeemable for exclusive products and experiences.</p>
+          </div>
+          <div class="benefit-card animate-fade-up animate-fade-up-3">
+            <span class="material-symbols-outlined benefit-card__icon">eco</span>
+            <h3 class="benefit-card__title">Ethical Sourcing</h3>
+            <p class="benefit-card__text">Every bean is direct-trade certified. You support farmers, we handle the rest.</p>
+          </div>
+          <div class="benefit-card animate-fade-up">
+            <span class="material-symbols-outlined benefit-card__icon">pause</span>
+            <h3 class="benefit-card__title">Flexible Pausing</h3>
+            <p class="benefit-card__text">Pause, skip, or cancel anytime — no fees, no friction, no questions asked.</p>
+          </div>
+          <div class="benefit-card animate-fade-up animate-fade-up-1">
+            <span class="material-symbols-outlined benefit-card__icon">diversity_1</span>
+            <h3 class="benefit-card__title">Community Access</h3>
+            <p class="benefit-card__text">Private member forums, tasting events, and our seasonal origin trip waitlist.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══ EDITORIAL QUOTE ═══ -->
+    <div class="editorial-quote">
+      <span class="material-symbols-outlined quote-icon" aria-hidden="true">format_quote</span>
+      <blockquote>
+        "Coffee is not a morning necessity; it is a midnight contemplation, a sensory journey that begins before the first sip."
+      </blockquote>
+      <cite>— The Sommelier</cite>
+    </div>
+
+
+    <!-- ═══ TESTIMONIALS ═══ -->
+    <section class="section-pad container" aria-labelledby="testimonials-heading">
+      <div style="text-align:center;margin-bottom:3.5rem">
+        <h2 id="testimonials-heading" class="font-headline" style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:300">
+          The Circle Speaks
+        </h2>
+        <div class="divider-line"></div>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card animate-fade-up">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <blockquote class="testimonial-card__quote">
+            "The Velvet tier transformed my mornings entirely. Each month is a new obsession."
+          </blockquote>
+          <p class="testimonial-card__author">— Amara K., London</p>
+        </div>
+        <div class="testimonial-card animate-fade-up animate-fade-up-1">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <blockquote class="testimonial-card__quote">
+            "I've tried every subscription. Nothing comes close to the curation and quality here."
+          </blockquote>
+          <p class="testimonial-card__author">— Henrik L., Stockholm</p>
+        </div>
+        <div class="testimonial-card animate-fade-up animate-fade-up-2">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <blockquote class="testimonial-card__quote">
+            "The sommelier call alone is worth the price. An education in every sip."
+          </blockquote>
+          <p class="testimonial-card__author">— Priya M., Singapore</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══ NEWSLETTER ═══ -->
+    <div class="newsletter-section">
+      <div style="max-width:36rem;margin-inline:auto;text-align:center;padding-inline:1.5rem">
+        <h3 class="font-headline" style="font-size:clamp(1.75rem,4vw,3rem);font-weight:300;margin-bottom:1rem">
+          The Journal Entry
+        </h3>
+        <p style="color:var(--on-surface-variant);font-weight:300;line-height:1.7;margin-bottom:2.5rem">
+          Join our inner circle for exclusive access to microlot releases, brewing tutorials, and the stories behind the beans.
+        </p>
+        <form class="newsletter-form" data-newsletter aria-label="Newsletter signup">
+          <label for="email-membership" class="sr-only">Email address</label>
+          <input
+            id="email-membership"
+            type="email"
+            class="newsletter-input"
+            placeholder="Email Address"
+            required
+          />
+          <button type="submit" class="newsletter-submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div>© 2025 Velvet Crema</div>
+      <nav class="site-footer__links" aria-label="Legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sustainability</a>
+      </nav>
+      <nav class="site-footer__social" aria-label="Social">
+        <a href="#">Instagram</a>
+        <a href="#">Vimeo</a>
+      </nav>
+    </footer>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="../index.html" class="bottom-nav__item">
+      <span class="material-symbols-outlined">home_max</span>Home
+    </a>
+    <a href="boutique.html" class="bottom-nav__item">
+      <span class="material-symbols-outlined">local_cafe</span>Boutique
+    </a>
+    <a href="#" class="bottom-nav__item">
+      <span class="material-symbols-outlined">menu_book</span>Journal
+    </a>
+    <a href="cart.html" class="bottom-nav__item" style="position:relative">
+      <span class="material-symbols-outlined">shopping_cart</span>Cart
+      <span class="bottom-nav__badge">2</span>
+    </a>
+  </nav>
+
+  <button class="fab" aria-label="Concierge">
+    <span class="material-symbols-outlined">coffee_maker</span>
+    <span class="fab__tooltip">Concierge</span>
+  </button>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
