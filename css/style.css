@@ -3,7 +3,7 @@
    ============================================ */
 
 /* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 /* ============================================
@@ -67,8 +67,8 @@
   --on-error-container: #ffdad6;
 
   /* Typography */
-  --font-headline: 'Noto Serif', Georgia, serif;
-  --font-body: 'Manrope', sans-serif;
+  --font-headline: 'Playfair Display', Georgia, serif;
+  --font-body: 'Poppins', sans-serif;
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -93,6 +93,85 @@
   /* Nav Height */
   --nav-height: 4rem;
   --bottom-nav-height: 5rem;
+}
+
+/* Light Theme Overrides */
+html.light {
+  --background: #fdfbf7;
+  --surface: #fdfbf7;
+  --surface-dim: #f3efe9;
+  --surface-bright: #ffffff;
+  --surface-variant: #e8e2d9;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f9f7f2;
+  --surface-container: #f3efe9;
+  --surface-container-high: #eae5dc;
+  --surface-container-highest: #e3ded5;
+  
+  --on-background: #1a1614;
+  --on-surface: #1a1614;
+  --on-surface-variant: #4f4540;
+  
+  --outline: #9b8e88;
+  --outline-variant: #d3c3bd;
+  
+  --primary: #c08f1f;
+  --primary-dim: #bdae85;
+  --on-primary: #ffffff;
+  
+  --surface-tint: #c08f1f;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+}
+.custom-cursor.hover {
+  width: 48px; height: 48px;
+  background: var(--primary-dim);
+  mix-blend-mode: color-dodge;
+  border-color: transparent;
+}
+html.light .custom-cursor.hover {
+  mix-blend-mode: multiply;
+}
+
+/* Loading Screen */
+#vc-loader {
+  position: fixed;
+  inset: 0;
+  background: var(--background);
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#vc-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader-brand {
+  font-family: var(--font-headline);
+  font-size: 2.5rem;
+  color: var(--primary);
+  font-style: italic;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  animation: fadeInOut 2s infinite ease-in-out;
+}
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.3; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1); }
 }
 
 /* ============================================
@@ -1690,4 +1769,93 @@ ul, ol {
 }
 .checkout-modal-overlay.open .checkout-modal {
   transform: translateY(0);
+}
+/* ============================================
+   ANIMATIONS & REVEALS
+   ============================================ */
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animate-fade-in {
+  opacity: 0;
+  transition: opacity 1.2s ease-out;
+}
+
+.animate-fade-up.visible,
+.animate-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Delays for Children */
+.stagger-parent > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-parent > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-parent > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-parent > *:nth-child(4) { transition-delay: 0.4s; }
+
+/* Pulse Animation for interactive indicators */
+@keyframes softPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+.animate-pulse {
+  animation: softPulse 3s infinite ease-in-out;
+}
+
+/* ============================================
+   GLASSMORPHISM ENHANCEMENTS
+   ============================================ */
+.glass-glow {
+  position: relative;
+}
+
+.glass-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 20px rgba(233, 195, 73, 0.05);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glass-glow:hover::after {
+  opacity: 1;
+}
+
+/* Refinement to existing components */
+.product-card:hover .product-card__image-wrap img {
+  transform: scale(1.05);
+}
+
+.btn-outline {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+html.light .btn-outline {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+.divider-line {
+  width: 4rem;
+  height: 1px;
+  background: var(--primary);
+  margin: 2rem auto;
+  opacity: 0.5;
+}
+
+.section-pad {
+  padding-block: var(--spacing-3xl);
 }

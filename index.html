@@ -10,8 +10,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@300;400;600;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -82,6 +83,14 @@
 </head>
 
 <body>
+  <!-- Loading Screen -->
+  <div id="vc-loader">
+    <div class="loader-brand">Velvet Crema</div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="custom-cursor"></div>
+
   <!-- Top Navigation -->
   <header class="top-nav" role="banner">
     <div style="display:flex;align-items:center;gap:2.5rem">
@@ -102,6 +111,9 @@
         <a href="pages/membership.html" class="top-nav__link">Membership</a>
       </nav>
       <div class="top-nav__actions">
+        <button class="top-nav__icon-btn" id="theme-toggle" aria-label="Toggle Theme">
+          <span class="material-symbols-outlined">light_mode</span>
+        </button>
         <button class="top-nav__icon-btn" aria-label="Search">
           <span class="material-symbols-outlined">search</span>
         </button>
@@ -122,14 +134,18 @@
     ═══════════════════════════════════════ -->
     <section class="hero" aria-label="Hero">
       <div class="hero__bg">
-        <img src="images/coffee_hero_1775374671404.png" alt="Premium coffee cup — cinematic 3D render" loading="eager"
-          fetchpriority="high" />
+        <div id="coffee-3d-canvas" style="position: absolute; inset: 0; z-index: 0; mix-blend-mode: screen;"></div>
+        <img src="images/hero_premium.png" alt="Premium coffee cup — cinematic render" loading="eager"
+          fetchpriority="high" onerror="this.src='images/coffee_hero_1775374671404.png'"
+          style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8;" />
       </div>
       <div class="hero__overlay"></div>
       <div class="hero__overlay-lr"></div>
 
-      <div class="hero__content">
-        <span class="hero__eyebrow animate-fade-up animate-pulse">The Art of the Pour</span>
+      <div class="hero__content" style="position: relative; z-index: 1;">
+        <span class="hero__eyebrow animate-fade-up animate-pulse"
+          style="font-family: var(--font-body); letter-spacing: 0.25em; font-size: 0.75rem; text-transform: uppercase;">Crafted
+          for True Coffee Lovers</span>
         <h1 class="hero__title animate-fade-up animate-fade-up-1">
           Elevate Your<br /><em>Morning Ritual</em>
         </h1>
@@ -165,27 +181,44 @@
         <a href="pages/boutique.html" class="section-header__link">View All Series</a>
       </div>
 
-      <div class="collections-bento">
-        <!-- Dark Roast – large -->
-        <div class="bento-cell col-8">
-          <img class="bento-cell__img" src="images/coffee_beans_dark_1775374846714.png"
-            alt="Dark roasted coffee beans — warm spotlit closeup" />
+      <div class="bento-grid stagger-parent">
+        <!-- Signature Roast - Main Cell -->
+        <article class="bento-cell col-8 animate-fade-up">
+          <img class="bento-cell__img" src="images/coffee_roast_1775375043812.png"
+            alt="Signature Velvet Crema roast — detail shot of medium-dark oily beans" />
           <div class="bento-cell__gradient"></div>
           <div class="bento-cell__content">
-            <span class="label-caps text-primary" style="display:block;margin-bottom:1rem">Signature Series</span>
-            <h3 class="font-headline" style="font-size:clamp(1.75rem,3.5vw,3.25rem);font-weight:300;margin-bottom:1rem">
-              The Dark Roast Collection
+            <span class="label-caps text-primary">Micro-Lot</span>
+            <h3 class="font-headline"
+              style="font-size:clamp(1.8rem,4vw,3.5rem);font-weight:300;margin-bottom:1rem;line-height:1.1">
+              Signature<br /><em>Velvet Roast</em>
             </h3>
-            <p class="text-on-surface-var"
-              style="max-width:30rem;margin-bottom:1.5rem;font-weight:300;font-size:1.05rem">
-              Notes of toasted cacao, dark cherry, and a whisper of smoke. For those who seek intensity.
+            <p class="text-on-surface-var" style="margin-bottom:2rem;max-width:26rem;font-weight:300">
+              A heavy-bodied masterpiece defined by its viscous texture and deep, lingering finish.
             </p>
-            <a href="pages/product.html" class="btn btn-primary btn-sm">Discover</a>
+            <a href="pages/product.html" class="btn btn-primary btn-sm glass-glow">Experience Discovery</a>
           </div>
-        </div>
+        </article>
 
-        <!-- Accessories – side -->
-        <div class="bento-cell col-4">
+        <!-- Subscription - Side Cell -->
+        <aside class="bento-cell col-4 animate-fade-up">
+          <img class="bento-cell__img" src="images/coffee_making_1775375069411.png"
+            alt="Espresso shot pulling into a glass — rich golden crema layer" />
+          <div class="bento-cell__gradient"></div>
+          <div class="bento-cell__content">
+            <h3 class="font-headline"
+              style="font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:300;margin-bottom:0.75rem">
+              The Ritual<br />Subscription
+            </h3>
+            <p class="text-on-surface-var" style="margin-bottom:1.5rem;font-weight:300">
+              Curated beans delivered to your door every fortnight.
+            </p>
+            <a href="pages/membership.html" class="btn btn-outline btn-sm glass-glow">Join The Circle</a>
+          </div>
+        </aside>
+
+        <!-- Machine - Side Cell -->
+        <div class="bento-cell col-4 animate-fade-up">
           <img class="bento-cell__img" src="images/coffee_accessories_1775375095577.png"
             alt="Pour-over coffee maker and copper kettle" />
           <div class="bento-cell__gradient"></div>
@@ -205,7 +238,7 @@
         </div>
 
         <!-- Ethiopia – full-width bottom -->
-        <div class="bento-cell col-12" style="min-height:16rem">
+        <div class="bento-cell col-12 animate-fade-up" style="min-height:16rem">
           <div style="position:absolute;inset:0;display:flex;flex-direction:column">
             <!-- Mobile: stacked; Desktop: side-by-side -->
             <div style="display:flex;flex-direction:column;height:100%">
@@ -243,6 +276,42 @@
 
 
     <!-- ═══════════════════════════════════════
+         BRAND STORYTELLING
+    ═══════════════════════════════════════ -->
+    <section class="section-pad container" aria-label="Brand Storytelling">
+      <div class="stagger-parent"
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; text-align: center; margin-bottom: 3rem;">
+
+        <div class="story-block animate-fade-up">
+          <span class="material-symbols-outlined"
+            style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;">history_edu</span>
+          <h3 class="font-headline" style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem;">About Brand</h3>
+          <p class="text-on-surface-var" style="font-weight: 300; line-height: 1.6;">Velvet Crema stands as a testament
+            to the uncompromising pursuit of sensory perfection. We ethically source the world's most exclusive
+            micro-lots.</p>
+        </div>
+
+        <div class="story-block animate-fade-up">
+          <span class="material-symbols-outlined"
+            style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;">travel_explore</span>
+          <h3 class="font-headline" style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem;">Coffee Origins</h3>
+          <p class="text-on-surface-var" style="font-weight: 300; line-height: 1.6;"><strong
+              style="color:var(--on-surface);">Ethiopian Beans</strong> – Floral & Citrus Notes.<br><strong
+              style="color:var(--on-surface);">Colombian</strong> – Rich & Chocolatey.</p>
+        </div>
+
+        <div class="story-block animate-fade-up">
+          <span class="material-symbols-outlined"
+            style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;">water_drop</span>
+          <h3 class="font-headline" style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem;">Brewing Style</h3>
+          <p class="text-on-surface-var" style="font-weight: 300; line-height: 1.6;">From exact temperature controls to
+            hyper-precision grinds, our brewing philosophy marries analog craft with digital precision.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
          DAILY ESSENTIALS
     ═══════════════════════════════════════ -->
     <section class="section-pad container" aria-labelledby="essentials-heading">
@@ -253,7 +322,7 @@
         <div class="divider-line"></div>
       </div>
 
-      <div class="essentials-grid">
+      <div class="essentials-grid stagger-parent">
 
         <!-- Product 1 -->
         <article class="product-card animate-fade-up">

@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Velvet Crema — The Boutique</title>
   <meta name="description"
-    content="A curated collection of sensory excellence. From high-altitude volcanic soils to the precision of gold-standard brewing." />
+    content="A curated collection of sensory excellence. From high-altitude volcanic soils to the precision of gold-standard brewing. Explore the Velvet Crema Boutique." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@300;400;600;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
     rel="stylesheet" />
@@ -118,6 +118,14 @@
 </head>
 
 <body>
+  <!-- Loading Screen -->
+  <div id="vc-loader">
+    <div class="loader-brand">Velvet Crema</div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="custom-cursor"></div>
+
   <!-- Top Nav -->
   <header class="top-nav" role="banner">
     <div style="display:flex;align-items:center;gap:2rem">
@@ -133,6 +141,9 @@
         <a href="product.html" class="top-nav__link">Origin</a>
         <a href="membership.html" class="top-nav__link">Membership</a>
       </nav>
+      <button class="top-nav__icon-btn" id="theme-toggle" aria-label="Toggle Theme">
+        <span class="material-symbols-outlined">light_mode</span>
+      </button>
       <button class="top-nav__icon-btn" aria-label="Search">
         <span class="material-symbols-outlined">search</span>
       </button>
@@ -148,7 +159,7 @@
     <div class="container" style="padding-top:3rem">
 
       <!-- Page Header -->
-      <header style="margin-bottom:3rem">
+      <header style="margin-bottom:3rem" class="animate-fade-up">
         <h1 class="font-headline"
           style="font-size:clamp(2.5rem,7vw,5rem);font-weight:300;letter-spacing:-0.02em;margin-bottom:1rem">
           The Boutique
@@ -160,7 +171,7 @@
       </header>
 
       <!-- Category Navigation -->
-      <nav class="category-nav" aria-label="Product categories" style="margin-bottom:3rem">
+      <nav class="category-nav animate-fade-up" aria-label="Product categories" style="margin-bottom:3rem">
         <button class="category-pill active" data-filter="all">All Origins</button>
         <button class="category-pill" data-filter="india">India</button>
         <button class="category-pill" data-filter="china">China</button>
@@ -170,7 +181,7 @@
       </nav>
 
       <!-- Featured Bento Grid -->
-      <div class="boutique-bento">
+      <div class="boutique-bento stagger-parent">
         <!-- Large Feature -->
         <div class="b-featured b-main">
           <img src="https://i.pinimg.com/1200x/21/e4/41/21e441d6af58f64c8d082ffc69fbd3b0.jpg"
@@ -203,32 +214,26 @@
           </div>
         </div>
 
-        <!-- Side cards -->
-        <div class="b-side">
-          <div class="side-card" style="flex:1">
-            <img class="side-card__img" src="https://i.pinimg.com/736x/e9/b7/e5/e9b7e596d74785a154e8634f7f841937.jpg"
-              alt="Matte black gooseneck kettle on dark wood" />
+        <!-- Side Features -->
+        <div class="b-side stagger-parent">
+          <div class="side-card animate-fade-up">
+            <img src="https://lh3.googleusercontent.com/aidapublic/AB6AXuBx1VHN5WyoRaN337DtFNTOlMcBqpjxukLbp1gfFPfPWhM_Ypb2WvJQ8nOA9mcniRusw966bg2b9whKZ51zI46bGLzmPlZo0EzF9-IqGtp5x7mViztI0ZLNYlTuIto3WnMHA6k3KIC7SCTwULKyB2EXQUehqFiu-x-2PHH20xgpCUp134xB6gBQ9TBED572wDrbEfcBUudhseUboMQIxrrj8382spUUZl4o6sNrLwy6JKiT_bverRGoN0ZbRWElB6ES9hAk4-dIM"
+              class="side-card__img" alt="Artisan Cocoa Truffles — glossy chocolate detail" />
             <div class="side-card__content">
-              <h3 class="side-card__title">The Monarch Kettle</h3>
-              <p class="side-card__text">Precision pouring for the ritualistic brewer.</p>
-              <p class="side-card__price">$185.00</p>
-              <button class="top-nav__icon-btn primary-icon" onclick="addToCart('The Monarch Kettle', 185, event)"
-                aria-label="Add Monarch Kettle to cart">
-                <span class="material-symbols-outlined">add_circle</span>
-              </button>
+              <h3 class="side-card__title">Artisan Cocoa Truffles</h3>
+              <p class="side-card__text">70% single-origin dark chocolate.</p>
+              <div class="side-card__price">$14.00</div>
+              <button class="btn btn-outline btn-sm glass-glow" onclick="addToCart('Artisan Cocoa Truffles', 14.00, event)">Add to Bag</button>
             </div>
           </div>
-          <div class="side-card" style="flex:1">
-            <img class="side-card__img" src="https://i.pinimg.com/1200x/ed/ab/28/edab28b203767e5f00a326b33bd5bb87.jpg"
-              alt="Luxury coffee gift set in black box with gold foil" />
+          <div class="side-card animate-fade-up">
+            <img src="https://i.pinimg.com/736x/e9/b7/e5/e9b7e596d74785a154e8634f7f841937.jpg"
+              class="side-card__img" alt="Nocturnal Ceramic Set — matte black espresso cups" />
             <div class="side-card__content">
-              <h3 class="side-card__title">Midnight Taster Set</h3>
-              <p class="side-card__text">Three rare microlots in 100g editorial tins.</p>
-              <p class="side-card__price">$68.00</p>
-              <button class="top-nav__icon-btn primary-icon" onclick="addToCart('Midnight Taster Set', 68, event)"
-                aria-label="Add Midnight Taster Set to cart">
-                <span class="material-symbols-outlined">add_circle</span>
-              </button>
+              <h3 class="side-card__title">Nocturnal Ceramic Set</h3>
+              <p class="side-card__text">Matte finish hand-poured ceramics.</p>
+              <div class="side-card__price">$45.00</div>
+              <button class="btn btn-outline btn-sm glass-glow" onclick="addToCart('Nocturnal Ceramic Set', 45.00, event)">Add to Bag</button>
             </div>
           </div>
         </div>
@@ -248,7 +253,8 @@
         </div>
       </div>
 
-      <div class="product-grid" style="margin-bottom:4rem">
+      <!-- Product Grid -->
+      <div class="product-grid stagger-parent" style="margin-bottom:4rem">
 
         <!-- India: Monsooned Malabar -->
         <article class="product-card animate-fade-up" data-category="india">

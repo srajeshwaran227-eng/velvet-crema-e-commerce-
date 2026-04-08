@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Velvet Crema — Membership</title>
-  <meta name="description" content="Join the Velvet Crema inner circle. Exclusive microlot access, brewing tutorials, and curated membership benefits." />
+  <meta name="description" content="Join the Velvet Crema inner circle. Exclusive microlot access, brewing tutorials, and curated premium coffee membership benefits. Elevate your daily ritual." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
   <style>
@@ -208,6 +208,14 @@
 </head>
 
 <body>
+  <!-- Loading Screen -->
+  <div id="vc-loader">
+    <div class="loader-brand">Velvet Crema</div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="custom-cursor"></div>
+
   <header class="top-nav" role="banner">
     <div style="display:flex;align-items:center;gap:2rem">
       <button class="top-nav__icon-btn hamburger" aria-label="Open menu">
@@ -221,6 +229,9 @@
         <a href="boutique.html" class="top-nav__link">Boutique</a>
         <a href="membership.html" class="top-nav__link active" aria-current="page">Membership</a>
       </nav>
+      <button class="top-nav__icon-btn" id="theme-toggle" aria-label="Toggle Theme">
+        <span class="material-symbols-outlined">light_mode</span>
+      </button>
       <a href="cart.html" class="top-nav__icon-btn primary-icon" aria-label="Cart" style="position:relative">
         <span class="material-symbols-outlined">shopping_bag</span>
         <span style="position:absolute;top:-4px;right:-4px;background:var(--primary);color:var(--on-primary);font-size:0.5rem;font-weight:700;width:1rem;height:1rem;display:flex;align-items:center;justify-content:center;border-radius:50%">2</span>
@@ -268,7 +279,7 @@
         <div class="divider-line"></div>
       </div>
 
-      <div class="tiers-grid">
+      <div class="tiers-grid stagger-parent">
 
         <!-- Tier 1: Obsidian -->
         <div class="tier-card animate-fade-up">
@@ -297,7 +308,7 @@
               Members-only newsletter
             </li>
           </ul>
-          <button class="btn btn-outline" style="width:100%">Select Obsidian</button>
+          <button class="btn btn-outline btn-sm glass-glow" style="width:100%">Select Obsidian</button>
         </div>
 
         <!-- Tier 2: Velvet (Featured) -->
@@ -331,7 +342,7 @@
               Priority shipping, free returns
             </li>
           </ul>
-          <button class="btn btn-primary" style="width:100%">Select Velvet</button>
+          <button class="btn btn-primary btn-sm glass-glow" style="width:100%">Select Velvet</button>
         </div>
 
         <!-- Tier 3: Crema Noir -->
@@ -369,7 +380,7 @@
               Complimentary worldwide shipping
             </li>
           </ul>
-          <button class="btn btn-outline" style="width:100%">Select Crema Noir</button>
+          <button class="btn btn-outline btn-sm glass-glow" style="width:100%">Select Crema Noir</button>
         </div>
 
       </div>
@@ -385,7 +396,7 @@
           </h2>
           <div class="divider-line"></div>
         </div>
-        <div class="benefits-grid">
+        <div class="benefits-grid stagger-parent">
           <div class="benefit-card animate-fade-up">
             <span class="material-symbols-outlined benefit-card__icon">local_shipping</span>
             <h3 class="benefit-card__title">Priority Delivery</h3>

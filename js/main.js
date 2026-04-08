@@ -4,6 +4,159 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ─── Premium Features Init ──────────────── */
+  // 1. Loading Screen
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('vc-loader');
+    if (loader) {
+      setTimeout(() => loader.classList.add('hidden'), 500); // Small delay for branding
+    }
+  });
+
+  // 2. Custom Cursor
+  const cursor = document.getElementById('custom-cursor');
+  if (cursor) {
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    const interactiveSelectors = 'a, button, .product-card, .btn, .bento-cell, .side-card, .category-pill, .tier-card, .benefit-card, .vc-result-card';
+    document.addEventListener('mouseover', e => {
+      if (e.target.closest(interactiveSelectors)) {
+        cursor.classList.add('hover');
+      }
+    });
+    document.addEventListener('mouseout', e => {
+      if (!e.relatedTarget || !e.relatedTarget.closest(interactiveSelectors)) {
+        cursor.classList.remove('hover');
+      }
+    });
+  }
+
+  // 3. Theme Toggle
+  const html = document.documentElement;
+  const themeToggle = document.getElementById('theme-toggle');
+  
+  // Set initial theme
+  const savedTheme = localStorage.getItem('vc-theme') || 'dark';
+  if (savedTheme === 'light') {
+    html.classList.replace('dark', 'light');
+    if(themeToggle) themeToggle.querySelector('span').textContent = 'dark_mode';
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      if (html.classList.contains('dark')) {
+        html.classList.replace('dark', 'light');
+        localStorage.setItem('vc-theme', 'light');
+        themeToggle.querySelector('span').textContent = 'dark_mode';
+      } else {
+        html.classList.replace('light', 'dark');
+        localStorage.setItem('vc-theme', 'dark');
+        themeToggle.querySelector('span').textContent = 'light_mode';
+      }
+    });
+  }
+
+  // 4. Three.js 3D Coffee Animation (Flowing Liquid Gold)
+  const canvasContainer = document.getElementById('coffee-3d-canvas');
+  if (canvasContainer && typeof THREE !== 'undefined') {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, canvasContainer.clientWidth / canvasContainer.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+    canvasContainer.appendChild(renderer.domElement);
+
+    // Create a "Liquid Swirl" shape
+    const geometry = new THREE.TorusKnotGeometry(3, 0.8, 150, 20);
+    const material = new THREE.MeshPhysicalMaterial({
+      color: 0xe9c349, // Gold
+      metalness: 0.9,
+      roughness: 0.1,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+      reflectivity: 1.0,
+      transmission: 0.2, // Subtle glass/liquid effect
+      thickness: 1.0
+    });
+    
+    const swirl = new THREE.Mesh(geometry, material);
+    swirl.rotation.x = Math.PI / 4;
+    scene.add(swirl);
+
+    // Lighting (Cinematic)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+    
+    const pointLight = new THREE.PointLight(0xffffff, 3);
+    pointLight.position.set(10, 10, 10);
+    scene.add(pointLight);
+    
+    const blueLight = new THREE.PointLight(0x4444ff, 1);
+    blueLight.position.set(-10, -10, -10);
+    scene.add(blueLight);
+
+    camera.position.z = 15;
+
+    // Mouse Parallax
+    let mouseX = 0, mouseY = 0;
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX - window.innerWidth / 2) / 100;
+      mouseY = (e.clientY - window.innerHeight / 2) / 100;
+    });
+
+    // Handle Resize
+    window.addEventListener('resize', () => {
+      if (!canvasContainer) return;
+      camera.aspect = canvasContainer.clientWidth / canvasContainer.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+    });
+
+    // Animation Loop
+    let clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+      
+      // Complex Rotation
+      swirl.rotation.z = time * 0.1;
+      swirl.rotation.y = time * 0.15;
+      
+      // Follow mouse subtly
+      swirl.position.x += (mouseX - swirl.position.x) * 0.05;
+      swirl.position.y += (-mouseY - swirl.position.y) * 0.05;
+      
+      // Floating pulse
+      swirl.scale.setScalar(1 + Math.sin(time * 0.5) * 0.05);
+      
+      renderer.render(scene, camera);
+    }
+    animate();
+  }
+
+  // 5. Scroll Reveal Utility (Intersection Observer)
+  const revealOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+  };
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, revealOptions);
+
+  // We reuse 'animate-fade-up' components and define a 'visible' class in CSS
+  document.querySelectorAll('.animate-fade-up, .animate-fade-in, .story-block, .product-card').forEach(el => {
+    revealObserver.observe(el);
+  });
+
   /* ─── Active Nav Link ─────────────────────── */
   const currentPage = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.top-nav__link, .bottom-nav__item').forEach(link => {
@@ -564,7 +717,13 @@ function addToCart(name, price, event) {
     }
   }
 
-  cart.push({ name, price, image });
+  const existing = cart.find(item => item.name === name);
+  if (existing) {
+    existing.qty = (existing.qty || 1) + 1;
+  } else {
+    cart.push({ name, price, image, qty: 1 });
+  }
+  
   localStorage.setItem("cart", JSON.stringify(cart));
 
   if (window.showToast) {
@@ -588,8 +747,8 @@ function loadCart() {
     container.innerHTML = "<p>Your cart is empty.</p>";
   } else {
     cart.forEach((item, index) => {
-      total += item.price;
-      // Using generic placeholder for cart thumbnail; could match exactly if needed
+      const qty = item.qty || 1;
+      total += item.price * qty;
       const imgSrc = item.image || '../assets/images/coffee_bag_1775375120850.png';
       container.innerHTML += `
         <article class="cart-item">
@@ -599,11 +758,11 @@ function loadCart() {
           <div class="cart-item__body">
             <div>
               <h3 class="cart-item__title">${item.name}</h3>
-              <p class="cart-item__meta">Standard Issue</p>
+              <p class="cart-item__meta">Qty: ${qty}</p>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-              <span class="cart-item__price">$${item.price.toFixed(2)}</span>
-              <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+              <span class="cart-item__price">$${(item.price * qty).toFixed(2)}</span>
+              <button class="remove-btn" onclick="removeFromCart(${index})">Remove All</button>
             </div>
           </div>
         </article>
@@ -716,7 +875,6 @@ function showReceipt(order) {
         <div class="receipt-grand">
           <span>Total Paid</span><span>$${order.total.toFixed(2)}</span>
         </div>
-      </div>
 
       <!-- Thank-you note -->
       <p class="receipt-thankyou">✨ Thank you for your order! Your coffee is being lovingly prepared.</p>
