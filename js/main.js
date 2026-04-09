@@ -13,25 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 2. Custom Cursor
-  const cursor = document.getElementById('custom-cursor');
-  if (cursor) {
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-    const interactiveSelectors = 'a, button, .product-card, .btn, .bento-cell, .side-card, .category-pill, .tier-card, .benefit-card, .vc-result-card';
-    document.addEventListener('mouseover', e => {
-      if (e.target.closest(interactiveSelectors)) {
-        cursor.classList.add('hover');
-      }
-    });
-    document.addEventListener('mouseout', e => {
-      if (!e.relatedTarget || !e.relatedTarget.closest(interactiveSelectors)) {
-        cursor.classList.remove('hover');
-      }
-    });
-  }
 
   // 3. Theme Toggle
   const html = document.documentElement;

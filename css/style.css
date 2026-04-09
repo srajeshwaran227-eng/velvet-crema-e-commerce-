@@ -122,27 +122,6 @@ html.light {
   --surface-tint: #c08f1f;
 }
 
-/* Custom Cursor */
-.custom-cursor {
-  position: fixed;
-  top: 0; left: 0;
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  border: 1.5px solid var(--primary);
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
-}
-.custom-cursor.hover {
-  width: 48px; height: 48px;
-  background: var(--primary-dim);
-  mix-blend-mode: color-dodge;
-  border-color: transparent;
-}
-html.light .custom-cursor.hover {
-  mix-blend-mode: multiply;
-}
 
 /* Loading Screen */
 #vc-loader {
